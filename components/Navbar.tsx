@@ -21,6 +21,7 @@ export default function Navbar() {
           MAYUR<span className="text-accent">.</span>PATEL
         </Link>
         
+        
         <div className="flex items-center gap-6 md:gap-8">
           {navItems.map((item) => (
             <Link 
@@ -34,6 +35,11 @@ export default function Navbar() {
               {item.label}
             </Link>
           ))}
+          
+          {/* New UI Hint */}
+          <div className="hidden md:flex items-center gap-1 px-2 py-1 bg-surface border border-white/5 rounded text-xs text-secondary font-mono">
+            <span>⌘</span><span>K</span>
+          </div>
         </div>
       </div>
     </nav>

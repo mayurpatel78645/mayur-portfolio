@@ -4,6 +4,7 @@ import { GeistMono } from "geist/font/mono";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./globals.css";
+import CommandPalette from "../components/CommandPalette";
 
 export const metadata: Metadata = {
   title: "Mayur Patel | Software Engineer",
@@ -19,6 +20,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       */}
       <body className="flex flex-col min-h-screen">
         <Navbar />
+        <CommandPalette />
         <main className="flex-grow pt-24 pb-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto w-full">
           {children}
         </main>
