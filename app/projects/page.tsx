@@ -104,20 +104,42 @@ function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, 
       </div>
 
       <div className="lg:col-span-7 flex flex-col gap-6">
-        {/* NEW VISUAL STORYTELLING BLOCK */}
+        
+        {/* Visual Storytelling Block (ArchitectureDiagram) */}
         <div className="bg-surface/50 border border-white/5 rounded-xl p-6 relative overflow-hidden transition-colors duration-500 group-hover:border-white/10 group-hover:bg-surface">
-           <div className="absolute top-0 right-0 p-4">
+           <div className="absolute top-0 right-0 p-4 z-20">
               <span className="text-[10px] uppercase font-mono tracking-widest text-secondary/50">System Architecture</span>
            </div>
-           {/* If we have an architecture diagram for this type, render it */}
            {type && <ArchitectureDiagram type={type} isHovered={isHovered} />}
         </div>
 
-        {/* Existing Highlights */}
-        <div className="bg-surface border border-white/5 rounded-xl p-8">
-          <h3 className="text-lg font-medium mb-4">Engineering Highlights</h3>
-          {/* ... existing highlights ... */}
+        {/* UPGRADED Engineering Highlights & Stack Panel */}
+        <div className="bg-surface/30 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/50 group-hover:border-white/10">
+          <h3 className="text-sm font-mono uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-accent/80" />
+            Technical Implementation
+          </h3>
+          
+          {/* Highlights in a 2-column grid for a denser SaaS look */}
+          <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+            {highlights.map((highlight: string, i: number) => (
+              <li key={i} className="flex items-start gap-2.5">
+                <span className="text-accent mt-[3px] text-[10px] shrink-0">■</span> 
+                <span className="text-sm text-secondary leading-relaxed">{highlight}</span>
+              </li>
+            ))}
+          </ul>
+
+          {/* Tech Stack Pills integrated cleanly into the bottom */}
+          <div className="mt-8 pt-6 border-t border-white/5 flex flex-wrap gap-2">
+            {stack.map((tech: string) => (
+              <span key={tech} className="px-2.5 py-1 bg-background border border-white/10 rounded flex items-center text-[11px] uppercase tracking-wider text-secondary font-mono hover:text-primary transition-colors cursor-default">
+                {tech}
+              </span>
+            ))}
+          </div>
         </div>
+
       </div>
     </motion.div>
   );
