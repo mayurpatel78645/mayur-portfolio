@@ -46,29 +46,50 @@ export default function Home() {
         initial="hidden" 
         animate="visible" 
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-        className="min-h-[80vh] flex flex-col justify-center"
+        className="min-h-[85vh] flex flex-col justify-center pt-12"
       >
-        <motion.div variants={FADE_UP} className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm text-sm text-secondary">
+        <motion.div variants={FADE_UP} className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-surface backdrop-blur-sm text-sm text-secondary shadow-sm">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           Building systems that reduce human effort
         </motion.div>
         
-        <motion.h1 variants={FADE_UP} className="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.1] mb-8">
-          Engineering <span className="text-secondary">clarity</span> <br />
+        <motion.h1 variants={FADE_UP} className="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.1] mb-6">
+          Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">clarity</span> <br />
           out of operational chaos.
         </motion.h1>
 
-        <motion.p variants={FADE_UP} className="text-lg md:text-xl text-secondary max-w-2xl mb-12 leading-relaxed">
-          Full-stack engineer focused on AI systems, scalable infrastructure, and automation. Translating a decade of high-pressure leadership into resilient software architecture.
+        {/* Priority 7: Humanity & Stronger Storytelling */}
+        <motion.p variants={FADE_UP} className="text-lg md:text-xl text-secondary max-w-2xl mb-10 leading-relaxed">
+          Full-stack engineer focused on AI systems, scalable infrastructure, and automation. Translating a decade of high-pressure culinary leadership into resilient, human-centric software architecture.
         </motion.p>
 
+        {/* Priority 5: The Credibility Ribbon */}
+        <motion.div variants={FADE_UP} className="flex flex-wrap gap-8 md:gap-10 mb-12 py-6 border-y border-white/5">
+          <div className="flex flex-col gap-1">
+            <span className="text-3xl font-semibold text-primary tracking-tight">10 Yrs</span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">Operations (40+ Staff)</span>
+          </div>
+          <div className="flex flex-col gap-1 border-l border-white/10 pl-8 md:pl-10">
+            <span className="text-3xl font-semibold text-primary tracking-tight">4.3<span className="text-xl text-secondary/50">/4.5</span></span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">MITT Canada GPA</span>
+          </div>
+          <div className="flex flex-col gap-1 border-l border-white/10 pl-8 md:pl-10">
+            <span className="text-3xl font-semibold text-primary tracking-tight">95.7%</span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">BCA Sem 1 Score</span>
+          </div>
+          <div className="flex flex-col gap-1 border-l border-white/10 pl-8 md:pl-10">
+            <span className="text-3xl font-semibold text-primary tracking-tight">320 Hrs</span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">Engineering Internship</span>
+          </div>
+        </motion.div>
+
         <motion.div variants={FADE_UP} className="flex flex-wrap items-center gap-4">
-          <Link href="/projects" className="group flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-md font-medium transition-all hover:bg-white/90">
-            View Projects
+          <Link href="/projects" className="group flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-md font-medium transition-all hover:bg-white/90 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            View Case Studies
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Link>
           <Link href="/experience" className="flex items-center gap-2 bg-surface border border-white/10 text-primary px-6 py-3 rounded-md font-medium transition-all hover:bg-surfaceHover">
-            Operational Experience
+            Operational Background
           </Link>
         </motion.div>
       </motion.section>

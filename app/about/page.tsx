@@ -1,109 +1,129 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowDownRight } from "lucide-react";
+import { Target, Flame, Cpu, Rocket, ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+
+const TIMELINE_NODES = [
+  {
+    icon: Target,
+    period: "The Foundation",
+    title: "Front-Line Efficiency",
+    description: "Started at the ground level in retail operations at Sobeys. Learned the absolute fundamentals of customer-facing workflows and identifying bottlenecks in high-traffic environments.",
+    metrics: []
+  },
+  {
+    icon: Flame,
+    period: "The Crucible (10 Years)",
+    title: "Operational Leadership",
+    description: "A decade-long tenure at Joey Polo Park. Rose from the dish pit to Sous Chef. Mastered the art of high-pressure execution, real-time problem solving, and human orchestration in a volatile environment.",
+    metrics: ["Led 40+ Staff", "High-Volume Execution", "Workflow Optimization"]
+  },
+  {
+    icon: Cpu,
+    period: "The Realization",
+    title: "Systems & Automation",
+    description: "Began identifying systemic inefficiencies in kitchen operations. Transitioned from manual management to building automated waste tracking and optimizing inventory data pipelines.",
+    metrics: ["4.3/4.5 MITT GPA", "Data Pipelines", "Systems Thinking"]
+  },
+  {
+    icon: Rocket,
+    period: "The Pivot (Present)",
+    title: "Software Engineering",
+    description: "Relocated to India for formal Computer Applications education. Currently architecting AI-driven applications, asynchronous processing pipelines, and production-grade software systems.",
+    metrics: ["95.7% BCA Sem 1", "320-Hr Engineering Internship", "Full-Stack AI"]
+  }
+];
 
 export default function About() {
   return (
     <div className="max-w-4xl mx-auto pb-24">
       
-      {/* Hero Section */}
-      <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-        className="mb-32 mt-12"
-      >
-        <h1 className="text-4xl md:text-6xl font-semibold mb-6 tracking-tight">
-          From high-pressure kitchens <br className="hidden md:block" />
-          <span className="text-secondary">to scalable software systems.</span>
-        </h1>
-        <p className="text-xl text-secondary max-w-2xl leading-relaxed">
-          My engineering philosophy wasn't born in a classroom. It was forged over a decade in high-volume culinary operations, where systems thinking and pressure management were the difference between success and catastrophic failure.
+      {/* Header Section */}
+      <div className="mb-20 pt-8">
+        <h1 className="text-4xl md:text-5xl font-semibold mb-6 tracking-tight">The Architecture of a Career.</h1>
+        <p className="text-xl text-secondary leading-relaxed max-w-2xl">
+          I didn't start in a computer lab. I spent ten years learning how to build, scale, and lead complex operational systems under extreme pressure. Now, I write software that does the same thing.
         </p>
-      </motion.div>
+      </div>
 
-      {/* Cinematic Timeline */}
-      <div className="relative">
-        {/* Vertical Line */}
-        <div className="absolute left-[15px] md:left-[19px] top-0 bottom-0 w-px bg-gradient-to-b from-accent/50 via-white/10 to-transparent" />
+      {/* The Cinematic Timeline */}
+      <div className="relative pl-4 md:pl-0">
+        
+        {/* The Vertical Line */}
+        <div className="absolute left-[27px] md:left-1/2 md:-translate-x-1/2 top-2 bottom-2 w-px bg-gradient-to-b from-accent/50 via-white/10 to-transparent" />
 
-        <div className="space-y-24">
-          <TimelineNode 
-            year="The Foundation"
-            title="Understanding Operations"
-            description="Started as a cashier at Sobeys at 17, moving into the food industry. Learned early on that efficiency isn't just about moving fast—it's about designing environments where friction is eliminated."
-          />
-          
-          <TimelineNode 
-            year="The Crucible"
-            title="Dishwasher to Sous Chef"
-            description="Spent a decade in Canada at Joey Polo Park. Rose through the ranks by fundamentally understanding how pieces fit together. As a Sous Chef leading teams of up to 40 people, I wasn't just cooking; I was load-balancing human resources, optimizing live workflows, and debugging operational bottlenecks in real-time."
-          />
+        <div className="space-y-16">
+          {TIMELINE_NODES.map((node, index) => {
+            const isEven = index % 2 === 0;
+            
+            return (
+              <motion.div 
+                key={index}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                className={cn(
+                  "relative flex flex-col md:flex-row items-start gap-8 md:gap-0",
+                  isEven ? "md:flex-row" : "md:flex-row-reverse"
+                )}
+              >
+                
+                {/* Center Node Icon */}
+                <div className="absolute left-0 md:left-1/2 -translate-x-[5px] md:-translate-x-1/2 flex items-center justify-center w-14 h-14 rounded-full bg-surface border-4 border-background z-10 shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                  <node.icon className="w-5 h-5 text-accent" />
+                </div>
 
-          <TimelineNode 
-            year="The Realization"
-            title="Automating the Repetitive"
-            description="While managing high-volume service, I began automating repetitive operational systems—like tracking waste and streamlining setup efficiency. I realized my true passion wasn't just managing systems, but architecting them from the ground up."
-          />
+                {/* Content Card */}
+                <div className={cn(
+                  "ml-20 md:ml-0 md:w-1/2 flex flex-col",
+                  isEven ? "md:pr-16 items-start md:items-end text-left md:text-right" : "md:pl-16 items-start text-left"
+                )}>
+                  <span className="text-[10px] font-mono uppercase tracking-widest text-accent mb-2">{node.period}</span>
+                  <h3 className="text-2xl font-semibold mb-4 text-primary">{node.title}</h3>
+                  <p className="text-secondary leading-relaxed mb-6">
+                    {node.description}
+                  </p>
 
-          <TimelineNode 
-            year="The Pivot"
-            title="Engineering & AI Systems"
-            description="Returned to India to pursue a BCA, aggressively transitioning toward software engineering. Now, I apply that same 'chef brain' logic—empathy, leadership, and operational efficiency—to building AI systems and full-stack products."
-          />
+                  {/* Credibility Metrics Injection */}
+                  {node.metrics.length > 0 && (
+                    <div className={cn(
+                      "flex flex-wrap gap-2",
+                      isEven ? "md:justify-end" : "justify-start"
+                    )}>
+                      {node.metrics.map((metric, i) => (
+                        <span key={i} className="px-2.5 py-1 text-[11px] font-mono tracking-wider uppercase border border-white/10 bg-surface rounded-md text-primary/80">
+                          {metric}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+              </motion.div>
+            );
+          })}
         </div>
       </div>
 
-      {/* Core Themes Footer */}
+      {/* Footer / CTA */}
       <motion.div 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, margin: "-100px" }}
-        className="mt-32 pt-16 border-t border-white/10 grid grid-cols-2 md:grid-cols-4 gap-8"
+        viewport={{ once: true }}
+        className="mt-32 pt-12 border-t border-white/5 flex flex-col items-center text-center"
       >
-        <Theme title="Leadership" desc="Calm execution under intense pressure." />
-        <Theme title="Systems Mindset" desc="Building for scale and fault tolerance." />
-        <Theme title="Empathy" desc="Designing tools for human workflows." />
-        <Theme title="Automation" desc="Eliminating low-leverage repetitive work." />
+        <h3 className="text-2xl font-medium mb-6">Ready to see the execution?</h3>
+        <div className="flex gap-4">
+          <Link href="/projects" className="flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-md font-medium transition-all hover:bg-white/90 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+            View Engineering Case Studies
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+        </div>
       </motion.div>
 
-    </div>
-  );
-}
-
-function TimelineNode({ year, title, description }: { year: string, title: string, description: string }) {
-  return (
-    <motion.div 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
-      transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-      className="relative pl-12 md:pl-24"
-    >
-      {/* Node Indicator */}
-      <div className="absolute left-0 md:left-2 top-2 w-8 h-8 rounded-full bg-background border border-white/20 flex items-center justify-center">
-        <div className="w-2 h-2 rounded-full bg-accent" />
-      </div>
-
-      <div className="flex flex-col gap-2">
-        <span className="text-accent font-mono text-sm tracking-wider uppercase flex items-center gap-2">
-          <ArrowDownRight className="w-4 h-4" /> {year}
-        </span>
-        <h3 className="text-2xl md:text-3xl font-medium mb-2">{title}</h3>
-        <p className="text-secondary text-lg leading-relaxed max-w-2xl">
-          {description}
-        </p>
-      </div>
-    </motion.div>
-  );
-}
-
-function Theme({ title, desc }: { title: string, desc: string }) {
-  return (
-    <div>
-      <h4 className="text-primary font-medium mb-2">{title}</h4>
-      <p className="text-sm text-secondary">{desc}</p>
     </div>
   );
 }
