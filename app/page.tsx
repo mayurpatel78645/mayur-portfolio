@@ -15,14 +15,17 @@ const FADE_UP: Variants = {
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto pb-24">
+    <div className="max-w-4xl mx-auto pb-24 relative">
+
+      <div className="absolute top-[-150px] left-1/2 -translate-x-1/2 w-[600px] md:w-[800px] h-[400px] bg-accent/15 blur-[120px] rounded-full pointer-events-none -z-10" />
       
       {/* THE HERO (Kept exactly as we built it) */}
       <motion.section 
         initial="hidden" 
         animate="visible" 
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
-        className="min-h-[85vh] flex flex-col justify-center pt-12"
+        // THE FIX: Removed min-h and justify-center. Replaced with strict padding.
+        className="pt-32 md:pt-40 pb-20 flex flex-col"
       >
         <motion.div variants={FADE_UP} className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-surface backdrop-blur-sm text-sm text-secondary shadow-sm w-fit">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
