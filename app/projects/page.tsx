@@ -1,5 +1,7 @@
 "use client";
 
+import ArchitectureDiagram from "@/components/ArchitectureDiagram";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { GitBranch, ExternalLink } from "lucide-react";
@@ -15,6 +17,7 @@ export default function Projects() {
       <div className="space-y-24">
         {/* THE DIRECTOR - Centerpiece */}
         <ProjectCaseStudy 
+          type = "director"
           title="The Director"
           category="AI Systems & Video Processing Pipeline"
           problem="Editing long gameplay footage into short-form content manually takes hours of human effort."
@@ -30,7 +33,8 @@ export default function Projects() {
 
         {/* SMARTQR MENU OS */}
         <ProjectCaseStudy 
-          title="SmartQR Menu OS"
+          type = "smartqr"
+          title="SmartQR Menu"
           category="Realtime Infrastructure & Operations"
           problem="Restaurants struggle with physical menu limitations, making customers wait and complicating inventory updates."
           solution="A live synchronized mobile-first menu platform with real-time updates and an operational command center for staff."
@@ -46,6 +50,7 @@ export default function Projects() {
 
         {/* TATHYA-SATYAPAN */}
         <ProjectCaseStudy 
+          type = "tathya"
           title="Tathya-Satyapan"
           category="Browser Extension & AI Verification Engine"
           problem="Social media is saturated with unchecked, highly viral misinformation that users struggle to critically evaluate in real-time."
@@ -63,18 +68,23 @@ export default function Projects() {
   );
 }
 
-function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, githubUrl, highlights }: any) {
+function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, githubUrl, highlights, type }: any) {
+  // Track hover state to trigger the architecture animation
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <motion.div 
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-b border-white/10 pb-24 last:border-0"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-b border-white/10 pb-24 last:border-0 group"
     >
       <div className="lg:col-span-5 flex flex-col justify-between">
         <div>
           <p className="text-accent text-sm font-mono tracking-wider uppercase mb-2">{category}</p>
-          <h2 className="text-3xl font-semibold mb-6">{title}</h2>
+          <h2 className="text-3xl font-semibold mb-6 group-hover:text-accent transition-colors duration-500">{title}</h2>
           
           <div className="space-y-6 mb-8 text-secondary">
             <div>
@@ -89,36 +99,24 @@ function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, 
         </div>
 
         <div className="flex gap-4">
-          {githubUrl && (
-            <a href={githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-surface hover:bg-surfaceHover border border-white/10 px-4 py-2 rounded-md transition-colors">
-              <GitBranch className="w-4 h-4" /> Repository
-            </a>
-          )}
-          {demoUrl && (
-            <a href={demoUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-primary text-background px-4 py-2 rounded-md transition-colors hover:bg-white/90">
-              <ExternalLink className="w-4 h-4" /> Live Demo
-            </a>
-          )}
+          {/* Your existing Github/Demo buttons */}
         </div>
       </div>
 
-      <div className="lg:col-span-7 bg-surface border border-white/5 rounded-xl p-8">
-        <h3 className="text-lg font-medium mb-4">Engineering Highlights</h3>
-        <ul className="space-y-3 mb-8">
-          {highlights.map((highlight: string, i: number) => (
-            <li key={i} className="flex items-start gap-3 text-secondary">
-              <span className="text-accent mt-1">▹</span> {highlight}
-            </li>
-          ))}
-        </ul>
+      <div className="lg:col-span-7 flex flex-col gap-6">
+        {/* NEW VISUAL STORYTELLING BLOCK */}
+        <div className="bg-surface/50 border border-white/5 rounded-xl p-6 relative overflow-hidden transition-colors duration-500 group-hover:border-white/10 group-hover:bg-surface">
+           <div className="absolute top-0 right-0 p-4">
+              <span className="text-[10px] uppercase font-mono tracking-widest text-secondary/50">System Architecture</span>
+           </div>
+           {/* If we have an architecture diagram for this type, render it */}
+           {type && <ArchitectureDiagram type={type} isHovered={isHovered} />}
+        </div>
 
-        <h3 className="text-lg font-medium mb-4">Technical Stack</h3>
-        <div className="flex flex-wrap gap-2">
-          {stack.map((tech: string) => (
-            <span key={tech} className="px-3 py-1 bg-background border border-white/10 rounded-full text-sm text-secondary">
-              {tech}
-            </span>
-          ))}
+        {/* Existing Highlights */}
+        <div className="bg-surface border border-white/5 rounded-xl p-8">
+          <h3 className="text-lg font-medium mb-4">Engineering Highlights</h3>
+          {/* ... existing highlights ... */}
         </div>
       </div>
     </motion.div>
