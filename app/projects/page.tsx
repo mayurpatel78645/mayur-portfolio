@@ -21,9 +21,8 @@ export default function Projects() {
           type="director"
           title="The Director"
           category="AI Systems & Video Processing Pipeline"
-          problem="Editing long gameplay footage into short-form content manually takes hours of human effort."
-          solution="An AI-powered analysis system that automatically detects high-potential moments, generates structured editing outputs, and exports directly to DaVinci Resolve."
-          stack={["Python", "FastAPI", "Next.js", "TypeScript", "Google Gemini API", "FFmpeg", "Concurrent Futures"]}
+          problem="Manually indexing and editing multi-hour video files creates a massive operational bottleneck. Traditional NLEs (Non-Linear Editors) require real-time human review, making high-volume content pipelines impossible to scale efficiently."          
+          solution="A decoupled, asynchronous processing engine. A FastAPI backend handles FFmpeg chunking to bypass memory limits, while a concurrent LLM pipeline analyzes transcripts for narrative spikes. Output is dynamically serialized into FCPXML math for direct DaVinci Resolve timeline injection."          stack={["Python", "FastAPI", "Next.js", "TypeScript", "Google Gemini API", "FFmpeg", "Concurrent Futures"]}
           githubUrl="https://github.com/mayurpatel78645/the-director-backend"
           highlights={[
             "Architected an asynchronous processing pipeline handling gigabytes of video data.",
