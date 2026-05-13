@@ -8,34 +8,33 @@ import { cn } from "@/lib/utils";
 const TIMELINE_NODES = [
   {
     icon: Target,
-    period: "The Foundation",
-    title: "Front-Line Efficiency",
-    description: "Started at the ground level in retail operations at Sobeys. Learned the absolute fundamentals of customer-facing workflows and identifying bottlenecks in high-traffic environments.",
-    metrics: []
+    period: "2015 — 2019",
+    title: "The Foundation: Execution",
+    description: "Started in extreme high-volume environments at New York Fries and Cineplex in Canada. Learned the absolute fundamentals of workflow efficiency, consistency under pressure, and rapid context-switching.",
+    metrics: ["High-Volume Operations", "Workflow Efficiency"]
+  },
+  {
+    icon: Cpu, // Swapping the icon order to match the internship here
+    period: "2019 — 2023",
+    title: "The Climb & The Spark",
+    description: "Spent four years at Browns Socialhouse mastering complex operational systems. Concurrently pursued formal tech education, graduating with elite marks and landing a Software Developer Internship at Tactica Interactive.",
+    metrics: ["4.3/4.5 MITT GPA", "320-Hr Engineering Internship"]
   },
   {
     icon: Flame,
-    period: "The Crucible (10 Years)",
-    title: "Operational Leadership",
-    description: "A decade-long tenure at Joey Polo Park. Rose from the dish pit to Sous Chef. Mastered the art of high-pressure execution, real-time problem solving, and human orchestration in a volatile environment.",
-    metrics: ["Led 40+ Staff", "High-Volume Execution", "Workflow Optimization"]
-  },
-  {
-    icon: Cpu,
-    period: "The Realization",
-    title: "Systems & Automation",
-    description: "Began identifying systemic inefficiencies in kitchen operations. Transitioned from manual management to building automated waste tracking and optimizing inventory data pipelines.",
-    metrics: ["4.3/4.5 MITT GPA", "Data Pipelines", "Systems Thinking"]
+    period: "2023 — 2024",
+    title: "The Crucible: Leadership",
+    description: "Transitioned into senior management as Junior Sous Chef at JOEY Restaurant Group and Sous Chef at The Rec Room. Mastered human orchestration, inventory data pipelines, and leading large teams through critical service peaks.",
+    metrics: ["Led 40+ Staff", "Systems Optimization", "Real-time Triage"]
   },
   {
     icon: Rocket,
-    period: "The Pivot (Present)",
-    title: "Software Engineering",
-    description: "Relocated to India for formal Computer Applications education. Currently architecting AI-driven applications, asynchronous processing pipelines, and production-grade software systems.",
-    metrics: ["95.7% BCA Sem 1", "320-Hr Engineering Internship", "Full-Stack AI"]
+    period: "2024 — Present",
+    title: "The Pivot: Software Engineering",
+    description: "Relocated to India to pursue a formal BCA. Currently operating as a Freelance Software Developer, architecting full-stack AI applications, scalable data pipelines, and production-grade systems.",
+    metrics: ["95.7% BCA Sem 1", "Freelance Developer", "Full-Stack AI"]
   }
 ];
-
 export default function About() {
   return (
     <div className="max-w-4xl mx-auto pb-24">
