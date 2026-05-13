@@ -1,54 +1,30 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowRight, Terminal, GitBranch, Cpu } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight, Play, QrCode } from "lucide-react";
+import { motion, Variants } from "framer-motion";
 
-const FADE_UP = {
+const FADE_UP: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
     opacity: 1, 
     y: 0, 
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const } 
+    transition: { duration: 0.5, ease: [0.16, 1, 0.3, 1] } 
   },
 };
 
-const SKILL_CATEGORIES = [
-  {
-    title: "Frontend Engineering",
-    skills: ["TypeScript", "JavaScript", "React", "Next.js", "TailwindCSS"],
-  },
-  {
-    title: "Backend & APIs",
-    skills: ["Python", "FastAPI", "PHP", "C#", "REST APIs"],
-  },
-  {
-    title: "Systems & Automation",
-    skills: ["Playwright", "Selenium", "FFmpeg", "Node.js"],
-  },
-  {
-    title: "AI & Realtime Data",
-    skills: ["Google Gemini API", "PostgreSQL", "Supabase", "SQL"],
-  },
-  {
-    title: "Developer Tools",
-    skills: ["Git", "GitHub Actions", "VS Code", "Vercel"],
-  }
-];
-
 export default function Home() {
   return (
-    <div className="relative w-full">
-      {/* Subtle Background Glow */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-accent-glow blur-[120px] rounded-full pointer-events-none -z-10" />
-
+    <div className="max-w-4xl mx-auto pb-24">
+      
+      {/* THE HERO (Kept exactly as we built it) */}
       <motion.section 
         initial="hidden" 
         animate="visible" 
         variants={{ visible: { transition: { staggerChildren: 0.1 } } }}
         className="min-h-[85vh] flex flex-col justify-center pt-12"
       >
-        <motion.div variants={FADE_UP} className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-surface backdrop-blur-sm text-sm text-secondary shadow-sm">
+        <motion.div variants={FADE_UP} className="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full border border-white/10 bg-surface backdrop-blur-sm text-sm text-secondary shadow-sm w-fit">
           <span className="w-2 h-2 rounded-full bg-accent animate-pulse" />
           Building systems that reduce human effort
         </motion.div>
@@ -58,12 +34,10 @@ export default function Home() {
           out of operational chaos.
         </motion.h1>
 
-        {/* Priority 7: Humanity & Stronger Storytelling */}
         <motion.p variants={FADE_UP} className="text-lg md:text-xl text-secondary max-w-2xl mb-10 leading-relaxed">
           Full-stack engineer focused on AI systems, scalable infrastructure, and automation. Translating a decade of high-pressure culinary leadership into resilient, human-centric software architecture.
         </motion.p>
 
-        {/* Priority 5: The Credibility Ribbon */}
         <motion.div variants={FADE_UP} className="flex flex-wrap gap-8 md:gap-10 mb-12 py-6 border-y border-white/5">
           <div className="flex flex-col gap-1">
             <span className="text-3xl font-semibold text-primary tracking-tight">10 Yrs</span>
@@ -94,83 +68,47 @@ export default function Home() {
         </motion.div>
       </motion.section>
 
-      {/* Engineering Philosophy Section */}
+      {/* THE NEW FIX: Clickable "Selected Systems" Router instead of static filler */}
       <motion.section 
-        initial={{ opacity: 0 }} 
-        whileInView={{ opacity: 1 }} 
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
-        className="py-24 border-t border-white/10"
+        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <PhilosophyCard 
-            icon={<Cpu className="w-6 h-6 text-accent" />}
-            title="AI Systems Development"
-            description="Building tools like The Director to automate complex, time-consuming human workflows using LLMs and computer vision."
-          />
-          <PhilosophyCard 
-            icon={<Terminal className="w-6 h-6 text-accent" />}
-            title="Real-world Architecture"
-            description="Developing scalable platforms like SmartQR to solve immediate operational bottlenecks in fast-paced environments."
-          />
-          <PhilosophyCard 
-            icon={<GitBranch className="w-6 h-6 text-accent" />}
-            title="Maturity Under Pressure"
-            description="Leveraging years of managing 40+ person teams to bring calm, decisive leadership to software development and debugging."
-          />
-        </div>
-      </motion.section>
-
-      {/* Technical Arsenal Section - MOVED OUTSIDE THE GRID */}
-      <motion.section 
-        initial={{ opacity: 0 }} 
-        whileInView={{ opacity: 1 }} 
-        viewport={{ once: true, margin: "-100px" }}
-        className="py-24 border-t border-white/10"
-      >
-        <div className="mb-12">
-          <h2 className="text-3xl font-semibold mb-4">Technical Arsenal</h2>
-          <p className="text-secondary max-w-2xl">
-            Tools and frameworks I use to build scalable systems, automate workflows, and design real-time architectures.
-          </p>
+        <div className="flex items-end justify-between mb-8">
+          <h2 className="text-2xl font-semibold tracking-tight">Selected Systems</h2>
+          <Link href="/projects" className="group flex items-center gap-1.5 text-sm text-secondary hover:text-primary transition-colors font-mono uppercase tracking-widest">
+            View All <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SKILL_CATEGORIES.map((category, index) => (
-            <motion.div 
-              key={category.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="p-6 rounded-xl bg-surface border border-white/5 hover:border-white/10 transition-colors group"
-            >
-              <h3 className="text-lg font-medium mb-4 text-primary group-hover:text-accent transition-colors">
-                {category.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill) => (
-                  <span 
-                    key={skill} 
-                    className="px-3 py-1.5 bg-background border border-white/5 rounded-md text-sm text-secondary hover:text-primary transition-colors"
-                  >
-                    {skill}
-                  </span>
-                ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {/* Card 1: The Director */}
+          <Link href="/projects" className="group block p-8 rounded-xl bg-surface/30 border border-white/5 hover:bg-surface/50 hover:border-white/10 transition-all duration-300">
+            <div className="flex justify-between items-start mb-12">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-white transition-all duration-300">
+                <Play className="w-5 h-5 ml-0.5" />
               </div>
-            </motion.div>
-          ))}
+              <ArrowRight className="w-5 h-5 text-secondary/30 group-hover:text-primary group-hover:-rotate-45 transition-all duration-300" />
+            </div>
+            <h3 className="text-xl font-medium text-primary mb-2">The Director</h3>
+            <p className="text-sm text-secondary leading-relaxed">Asynchronous video processing pipeline using FastAPI, FFmpeg, and contextual AI ranking.</p>
+          </Link>
+
+          {/* Card 2: SmartQR */}
+          <Link href="/projects#smartqr" className="group block p-8 rounded-xl bg-surface/30 border border-white/5 hover:bg-surface/50 hover:border-white/10 transition-all duration-300">
+            <div className="flex justify-between items-start mb-12">
+              <div className="w-12 h-12 rounded-full bg-emerald-500/10 flex items-center justify-center border border-emerald-500/20 text-emerald-400 group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                <QrCode className="w-5 h-5" />
+              </div>
+              <ArrowRight className="w-5 h-5 text-secondary/30 group-hover:text-primary group-hover:-rotate-45 transition-all duration-300" />
+            </div>
+            <h3 className="text-xl font-medium text-primary mb-2">SmartQR</h3>
+            <p className="text-sm text-secondary leading-relaxed">Real-time restaurant operations platform built with Next.js and Supabase WebSockets.</p>
+          </Link>
         </div>
       </motion.section>
-    </div>
-  );
-}
 
-function PhilosophyCard({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) {
-  return (
-    <div className="p-6 rounded-xl bg-surface border border-white/5 hover:border-white/10 transition-colors">
-      <div className="mb-4 p-3 rounded-lg bg-background inline-block border border-white/5">{icon}</div>
-      <h3 className="text-xl font-medium mb-3">{title}</h3>
-      <p className="text-secondary leading-relaxed">{description}</p>
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default function Projects() {
         {/* SMARTQR MENU OS */}
         <ProjectCaseStudy 
           type="smartqr"
-          title="SmartQR Menu OS"
+          title="SmartQR Menu"
           category="Realtime Operations Platform"
           problem="Restaurants struggle with physical menu limitations, making customers wait and complicating inventory updates."
           solution="A live synchronized mobile-first menu platform with real-time updates and an operational command center for staff."
@@ -89,18 +89,18 @@ export default function Projects() {
 }
 
 function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, githubUrl, highlights, type, media }: any) {
-  // Track hover state to trigger the architecture animation
   const [isHovered, setIsHovered] = useState(false);
 
   return (
     <motion.div 
+      id={type} /* <-- 1. ADD THIS ID TO ACT AS THE ANCHOR */
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      // Switched to a 4/8 column split, added massive padding to the bottom
-      className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 border-b border-white/10 pb-32 last:border-0 group relative"
+      /* 2. ADD scroll-mt-32 TO THE END OF THIS CLASS STRING */
+      className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 border-b border-white/10 pb-32 last:border-0 group relative scroll-mt-32"
     >
       {/* LEFT COLUMN: Sticky Narrative & CTAs */}
       <div className="lg:col-span-4 relative">
