@@ -9,7 +9,6 @@ export default function CommandPalette() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
-  // Listen for Cmd+K (Mac) or Ctrl+K (Windows)
   // Listen for Cmd+K (Mac), Ctrl+K (Windows), and Escape
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
@@ -17,7 +16,6 @@ export default function CommandPalette() {
         e.preventDefault();
         setOpen((open) => !open);
       }
-      // Add this block to catch the Escape key
       if (e.key === "Escape") {
         setOpen(false);
       }
@@ -30,6 +28,16 @@ export default function CommandPalette() {
   const runCommand = (command: () => void) => {
     setOpen(false);
     command();
+  };
+
+  // Programmatic download to preserve cmdk keyboard accessibility
+  const handleDownload = () => {
+    const link = document.createElement("a");
+    link.href = "/mayur_patel_resume.pdf";
+    link.download = "Mayur_Patel_Resume.pdf";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   if (!open) return null;
@@ -68,8 +76,13 @@ export default function CommandPalette() {
             <CommandItem onSelect={() => runCommand(() => window.open("https://www.linkedin.com/in/mayur-patel-762087216/", "_blank"))} icon={<LinkedinIcon />} label="LinkedIn" />
             <CommandItem onSelect={() => runCommand(() => window.open("mailto:mayurpatel78645@gmail.com"))} icon={<Mail className="w-4 h-4" />} label="Email" />
             
-            {/* Note: You will need to drop a resume.pdf in your public folder for this to work */}
-            <CommandItem onSelect={() => runCommand(() => window.open("/resume.pdf", "_blank"))} icon={<FileText className="w-4 h-4" />} label="Download Resume" />
+            {/* The Fix: Triggers the hidden link download and adds the file size meta */}
+            <CommandItem 
+              onSelect={() => runCommand(handleDownload)} 
+              icon={<FileText className="w-4 h-4 text-accent" />} 
+              label="Download Resume" 
+              meta="PDF (124KB)"
+            />
           </Command.Group>
         </Command.List>
       </Command>
@@ -77,14 +90,21 @@ export default function CommandPalette() {
   );
 }
 
-// Sub-component for cleaner mapping
-function CommandItem({ onSelect, icon, label }: { onSelect: () => void, icon: React.ReactNode, label: string }) {
+// Sub-component upgraded to accept right-aligned metadata
+function CommandItem({ onSelect, icon, label, meta }: { onSelect: () => void, icon: React.ReactNode, label: string, meta?: string }) {
   return (
     <Command.Item 
       onSelect={onSelect} 
-      className="flex items-center gap-3 px-3 py-3 mt-1 text-sm text-primary rounded-md cursor-pointer aria-selected:bg-white/5 aria-selected:text-accent transition-colors"
+      className="flex items-center justify-between px-3 py-3 mt-1 text-sm text-primary rounded-md cursor-pointer aria-selected:bg-white/5 aria-selected:text-accent transition-colors group"
     >
-      {icon} {label}
+      <div className="flex items-center gap-3">
+        {icon} {label}
+      </div>
+      {meta && (
+        <span className="text-[10px] font-mono text-secondary/40 group-aria-selected:text-accent/60 transition-colors">
+          {meta}
+        </span>
+      )}
     </Command.Item>
   );
 }
