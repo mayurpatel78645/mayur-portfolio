@@ -3,16 +3,22 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
+import { Command } from "lucide-react";
 
 const navItems = [
   { path: "/", label: "Home" },
-  { path: "/about", label: "About" }, // Added this line
+  { path: "/about", label: "About" },
   { path: "/projects", label: "Projects" },
   { path: "/experience", label: "Experience" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+
+  // This fires the custom event we added to CommandPalette.tsx
+  const openCommandPalette = () => {
+    window.dispatchEvent(new CustomEvent("open-command-palette"));
+  };
 
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
@@ -21,8 +27,8 @@ export default function Navbar() {
           MAYUR<span className="text-accent">.</span>PATEL
         </Link>
         
-        
-        <div className="flex items-center gap-6 md:gap-8">
+        {/* DESKTOP NAVIGATION (Hidden on mobile) */}
+        <div className="hidden md:flex items-center gap-6 md:gap-8">
           {navItems.map((item) => (
             <Link 
               key={item.path} 
@@ -36,11 +42,25 @@ export default function Navbar() {
             </Link>
           ))}
           
-          {/* New UI Hint */}
-          <div className="hidden md:flex items-center gap-1 px-2 py-1 bg-surface border border-white/5 rounded text-xs text-secondary font-mono">
+          {/* Desktop UI Hint - Now clickable! */}
+          <button 
+            onClick={openCommandPalette}
+            className="flex items-center gap-1 px-2 py-1 bg-surface border border-white/5 hover:border-white/20 transition-colors rounded text-xs text-secondary font-mono"
+            aria-label="Open Command Palette"
+          >
             <span>⌘</span><span>K</span>
-          </div>
+          </button>
         </div>
+
+        {/* MOBILE NAVIGATION TRIGGER (Hidden on desktop) */}
+        <button 
+          onClick={openCommandPalette}
+          className="md:hidden flex items-center gap-2 px-3 py-2 rounded-lg bg-surface border border-white/10 text-primary active:scale-95 transition-all shadow-sm"
+        >
+          <Command className="w-4 h-4 text-accent" />
+          <span className="text-xs font-medium">Menu</span>
+        </button>
+
       </div>
     </nav>
   );

@@ -10,6 +10,7 @@ export default function CommandPalette() {
   const router = useRouter();
 
   // Listen for Cmd+K (Mac), Ctrl+K (Windows), and Escape
+  // Update your existing useEffect in CommandPalette.tsx to look like this:
   useEffect(() => {
     const down = (e: KeyboardEvent) => {
       if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
@@ -21,8 +22,16 @@ export default function CommandPalette() {
       }
     };
     
+    // NEW: Listen for our custom mobile button click
+    const handleCustomOpen = () => setOpen(true);
+
     document.addEventListener("keydown", down);
-    return () => document.removeEventListener("keydown", down);
+    window.addEventListener("open-command-palette", handleCustomOpen);
+    
+    return () => {
+      document.removeEventListener("keydown", down);
+      window.removeEventListener("open-command-palette", handleCustomOpen);
+    };
   }, []);
 
   const runCommand = (command: () => void) => {

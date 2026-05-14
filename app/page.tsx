@@ -97,7 +97,7 @@ export default function Home() {
           Full-stack engineer focused on AI systems, scalable infrastructure, and automation. Translating a decade of high-pressure culinary leadership into resilient, human-centric software architecture.
         </motion.p>
 
-        <motion.div variants={FADE_UP} className="flex flex-wrap gap-8 md:gap-10 mb-12 py-8 border-y border-white/5 bg-gradient-to-r from-surface/30 to-transparent backdrop-blur-sm shadow-inner rounded-xl px-6 md:px-0">
+        <motion.div variants={FADE_UP} className="grid grid-cols-2 gap-y-10 gap-x-6 md:flex md:flex-wrap md:gap-10 mb-12 py-10 border-y border-white/5 bg-gradient-to-r from-surface/30 to-transparent backdrop-blur-sm shadow-inner rounded-xl px-8 md:px-0">
           <div className="flex flex-col gap-1 md:pl-6">
             <span className="text-3xl font-semibold text-primary tracking-tight">10 Yrs</span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">Operations (40+ Staff)</span>
