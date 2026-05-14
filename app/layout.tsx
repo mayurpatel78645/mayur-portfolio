@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     siteName: "Mayur Patel Portfolio",
     images: [
       {
-        url: "/og-image.png", // We will create this next
+        url: "og-image.png", // We will create this next
         width: 1200,
         height: 630,
         alt: "Mayur Patel - Engineering Portfolio",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mayur Patel | Systems Engineer",
     description: "Full-stack engineer focused on AI systems, scalable infrastructure, and automation.",
-    images: ["/og-image.png"],
+    images: ["og-image.png"],
   },
   robots: {
     index: true,
