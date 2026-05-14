@@ -110,7 +110,39 @@ export default function Projects() {
             { src: "tathya-3.png", label: "AI Analysis" },
           ]}
         />
+
+        <motion.section
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="mt-32 p-8 md:p-12 rounded-2xl bg-gradient-to-b from-surface/20 to-transparent border border-white/5 relative overflow-hidden group"
+        >
+          {/* Subtle animated Live indicator */}
+          <div className="absolute top-0 right-0 p-8 flex items-center gap-2">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-[10px] font-mono uppercase tracking-widest text-emerald-500/80 font-medium">In Development</span>
+          </div>
+
+          <h3 className="text-xs font-mono uppercase tracking-widest text-accent mb-3">Active Research</h3>
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-6">AI Job Copilot</h2>
+
+          <p className="text-secondary leading-relaxed max-w-2xl mb-8">
+            Designing a modular AI system that analyzes job descriptions, computes candidate-job fit scores, and generates tailored resumes using strictly truthful user data. Currently architecting scalable backend pipelines using FastAPI, PostgreSQL, vector embeddings, and Playwright for intelligent automation.
+          </p>
+
+          <div className="flex flex-wrap gap-2.5">
+            {["FastAPI", "Vector Embeddings", "PostgreSQL", "Playwright", "LLM Orchestration"].map(tech => (
+              <span key={tech} className="px-3 py-1.5 bg-background/50 border border-white/5 rounded flex items-center text-[10px] uppercase tracking-wider text-secondary/70 font-mono cursor-default group-hover:border-white/10 transition-colors">
+                {tech}
+              </span>
+            ))}
+          </div>
+        </motion.section>
       </div>
+      
     </div>
   );
 }
