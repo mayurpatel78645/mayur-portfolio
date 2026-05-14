@@ -8,6 +8,7 @@ import CommandPalette from "../components/CommandPalette";
 import CursorGlow from "../components/CursorGlow";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://mayur-portfolio-two.vercel.app"),
   title: "Mayur Patel | Systems Engineer",
   description: "Full-stack engineer focused on AI systems, scalable infrastructure, and automation. Translating a decade of operational leadership into resilient software architecture.",
   keywords: ["Software Engineer", "Full-Stack Developer", "AI Systems", "React", "Next.js", "Python", "FastAPI"],
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "Mayur Patel Portfolio",
     images: [
       {
-        url: "og-image.png", // We will create this next
+        url: "/og-image.png", // We will create this next
         width: 1200,
         height: 630,
         alt: "Mayur Patel - Engineering Portfolio",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mayur Patel | Systems Engineer",
     description: "Full-stack engineer focused on AI systems, scalable infrastructure, and automation.",
-    images: ["og-image.png"],
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
