@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Play, QrCode, Zap, Layers } from "lucide-react";
+import { ArrowRight, Play, QrCode, Layers } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 
 // --- GLOBAL MOTION RHYTHM ---
@@ -27,13 +27,18 @@ const FADE_UP: Variants = {
 };
 
 // --- SIGNATURE VISUAL: Background Intelligence ---
+// Restored to the exact Live Vercel version that you loved
 function AbstractDataFlow() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none flex justify-center -z-10">
-      <div className="w-[800px] h-full relative opacity-60 md:opacity-80">
-        <div className="absolute top-[20%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-accent/10 blur-[120px] rounded-full" />
+      <div className="w-[800px] lg:w-[1000px] h-full relative opacity-60 md:opacity-80">
+        
+        {/* Restored the soft, organic blur you preferred, perfectly centered */}
+        <div className="absolute top-[5%] left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-accent/10 blur-[120px] rounded-full" />
+        
         <svg className="absolute w-full h-full" viewBox="0 0 800 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M400 100 L400 1100 M100 400 L700 400 M200 200 L600 600 M600 200 L200 600" stroke="rgba(255,255,255,0.04)" strokeWidth="1" />
+          
           <motion.path
             d="M400 100 L400 1100"
             stroke="#A78BFA"
@@ -48,6 +53,7 @@ function AbstractDataFlow() {
             }}
             transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
           />
+          
           <motion.path
             d="M100 400 L700 400"
             stroke="#A78BFA"
@@ -70,7 +76,8 @@ function AbstractDataFlow() {
 
 export default function Home() {
   return (
-    <div className="max-w-4xl mx-auto pb-24 relative">
+    // THE FIX: max-w-5xl. Wider than before, but tight enough to keep the lasers visible behind the content.
+    <div className="max-w-5xl mx-auto px-6 md:px-8 pb-24 relative">
       <AbstractDataFlow />
       
       {/* THE HERO */}
@@ -78,17 +85,32 @@ export default function Home() {
         variants={CONTAINER_VARIANTS}
         initial="hidden" 
         animate="visible" 
-        className="pt-32 md:pt-40 pb-20 flex flex-col relative z-10"
+        className="pt-28 md:pt-32 pb-20 flex flex-col relative z-10"
       >
-        <motion.div variants={FADE_UP} className="mb-6 inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-surface/80 backdrop-blur-md text-sm text-secondary shadow-sm w-fit">
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
-          </span>
-          Building systems that reduce human effort
+        <motion.div variants={FADE_UP} className="flex flex-col gap-5 mb-6">
+          
+          {/* THE TELEMETRY ANCHOR: Keeps the top from feeling empty */}
+          <div className="flex items-center gap-3 text-[9px] font-mono uppercase tracking-[0.2em] text-secondary/40 ml-1">
+             <span className="flex items-center gap-1.5">
+               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500/20 flex items-center justify-center">
+                 <span className="w-0.5 h-0.5 bg-emerald-400 rounded-full animate-ping" />
+               </span> 
+               System Online
+             </span>
+             <span className="opacity-50">/</span>
+             <span>Node: Mira Bhayandar, MH</span>
+          </div>
+
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-white/10 bg-surface/80 backdrop-blur-md text-sm text-secondary shadow-sm w-fit">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+            </span>
+            Building systems that reduce human effort
+          </div>
         </motion.div>
         
-        <motion.h1 variants={FADE_UP} className="text-5xl md:text-7xl font-semibold tracking-tight leading-[1.1] mb-6">
+        <motion.h1 variants={FADE_UP} className="text-5xl md:text-7xl lg:text-[5rem] font-semibold tracking-tight leading-[1.05] mb-6 max-w-4xl">
           Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">clarity</span> <br />
           out of operational chaos.
         </motion.h1>
@@ -97,20 +119,21 @@ export default function Home() {
           Full-stack engineer focused on AI systems, scalable infrastructure, and automation. Translating a decade of high-pressure culinary leadership into resilient, human-centric software architecture.
         </motion.p>
 
-        <motion.div variants={FADE_UP} className="grid grid-cols-2 gap-y-10 gap-x-6 md:flex md:flex-wrap md:gap-10 mb-12 py-10 border-y border-white/5 bg-gradient-to-r from-surface/30 to-transparent backdrop-blur-sm shadow-inner rounded-xl px-8 md:px-0">
-          <div className="flex flex-col gap-1 md:pl-6">
+        {/* RESTORED: The compact, cohesive stats ribbon you preferred */}
+        <motion.div variants={FADE_UP} className="grid grid-cols-2 gap-y-10 gap-x-6 md:flex md:flex-wrap md:gap-12 items-center mb-12 py-10 border-y border-white/5 bg-gradient-to-r from-surface/30 to-transparent backdrop-blur-sm shadow-inner rounded-xl px-8 md:px-10">
+          <div className="flex flex-col gap-1">
             <span className="text-3xl font-semibold text-primary tracking-tight">10 Yrs</span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">Operations (40+ Staff)</span>
           </div>
-          <div className="flex flex-col gap-1 md:border-l border-white/10 pl-0 md:pl-10">
+          <div className="flex flex-col gap-1 md:border-l border-white/10 md:pl-12">
             <span className="text-3xl font-semibold text-primary tracking-tight">4.3<span className="text-xl text-secondary/50">/4.5</span></span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">MITT Canada GPA</span>
           </div>
-          <div className="flex flex-col gap-1 md:border-l border-white/10 pl-0 md:pl-10">
+          <div className="flex flex-col gap-1 md:border-l border-white/10 md:pl-12">
             <span className="text-3xl font-semibold text-primary tracking-tight">95.7%</span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">BCA Sem 1 Score</span>
           </div>
-          <div className="flex flex-col gap-1 md:border-l border-white/10 pl-0 md:pl-10">
+          <div className="flex flex-col gap-1 md:border-l border-white/10 md:pl-12">
             <span className="text-3xl font-semibold text-primary tracking-tight">320 Hrs</span>
             <span className="text-[10px] font-mono uppercase tracking-widest text-secondary">Engineering Internship</span>
           </div>
@@ -143,7 +166,6 @@ export default function Home() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Card 1: The Director */}
           <Link href="/projects#director" className="group block p-8 rounded-2xl bg-gradient-to-br from-surface/40 to-surface/10 border border-white/5 hover:border-white/10 transition-all duration-500 shadow-inner backdrop-blur-sm relative overflow-hidden">
             <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="flex justify-between items-start mb-8 relative z-10">
@@ -163,7 +185,6 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* Card 2: SmartQR */}
           <Link href="/projects#smartqr" className="group block p-8 rounded-2xl bg-gradient-to-br from-surface/40 to-surface/10 border border-white/5 hover:border-white/10 transition-all duration-500 shadow-inner backdrop-blur-sm relative overflow-hidden">
              <div className="absolute inset-0 bg-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
             <div className="flex justify-between items-start mb-8 relative z-10">
@@ -185,7 +206,7 @@ export default function Home() {
         </div>
       </motion.section>
 
-      {/* PRIORITY 7: THE OPERATIONAL PHILOSOPHY (The Unforgettable Moment) */}
+      {/* PRIORITY 7: THE OPERATIONAL PHILOSOPHY */}
       <motion.section 
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -210,8 +231,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Interactive Visual Element */}
-        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 opacity-10 group-hover/philosophy:opacity-20 transition-opacity duration-1000">
+        <div className="absolute right-[-10%] top-1/2 -translate-y-1/2 opacity-10 group-hover/philosophy:opacity-20 transition-opacity duration-1000 hidden md:block">
            <div className="relative w-80 h-80">
               <motion.div 
                 animate={{ rotate: 360 }}
