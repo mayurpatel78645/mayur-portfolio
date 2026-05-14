@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://mayur-patel.vercel.app", // Update this to your actual Vercel domain!
+    url: "https://mayur-portfolio-two.vercel.app/", // Update this to your actual Vercel domain!
     title: "Mayur Patel | Systems Engineer",
     description: "Building systems that reduce human effort. Explore my case studies in AI pipelines, real-time sync, and scalable architecture.",
     siteName: "Mayur Patel Portfolio",
