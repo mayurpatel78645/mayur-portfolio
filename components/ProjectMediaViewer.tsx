@@ -2,60 +2,92 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import Image from "next/image"; // Note: Switch to a standard <img> tag if you aren't using Next/Image optimizations
 
-type ImageMedia = {
-  src: string;
-  label: string;
-};
-
-export default function ProjectMediaViewer({ images }: { images: ImageMedia[] }) {
+export default function ProjectMediaViewer({ images }: { images: { src: string; label: string }[] }) {
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  const handleNext = () => setCurrentIndex((prev) => (prev + 1) % images.length);
+  const handlePrev = () => setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
+
+  if (!images || images.length === 0) return null;
+
   return (
-    <div className="flex flex-col gap-4 w-full">
-      {/* Cinematic Image Stage */}
-      <div className="relative w-full aspect-video rounded-xl bg-[#030303] border border-white/10 overflow-hidden shadow-2xl group flex items-center justify-center">
+    <div className="flex flex-col gap-4">
+      {/* THE MAC OS WINDOW WRAPPER */}
+      <div className="relative w-full aspect-[16/10] rounded-xl bg-surface border border-white/10 shadow-2xl overflow-hidden group">
         
-        {/* Subtle ambient lighting behind the image */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-accent/5 to-transparent opacity-50" />
+        {/* Fake Browser/Window Header */}
+        <div className="absolute top-0 left-0 right-0 h-10 bg-surface/80 backdrop-blur-md border-b border-white/5 flex items-center px-4 z-20">
+          <div className="flex gap-1.5">
+            <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+            <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+          </div>
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 rounded bg-background/50 border border-white/5">
+            <span className="text-[10px] font-mono text-secondary/60 tracking-widest uppercase">
+              {images[currentIndex].label}
+            </span>
+          </div>
+        </div>
 
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, scale: 0.98, filter: "blur(4px)" }}
-            animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, transition: { duration: 0.15 } }}
-            transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 flex items-center justify-center p-2"
-          >
-            {/* Using object-contain ensures tall mobile screenshots aren't awkwardly cropped */}
-            <img
-              src={images[currentIndex].src}
-              alt={images[currentIndex].label}
-              className="w-full h-full object-contain drop-shadow-2xl rounded-md"
-            />
-          </motion.div>
-        </AnimatePresence>
+        {/* The Image Viewport */}
+        <div className="absolute inset-0 pt-10 bg-background/50">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, scale: 0.98 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 1.02 }}
+              transition={{ duration: 0.3 }}
+              className="relative w-full h-full"
+            >
+              {/* Replace with <Image /> if you have domains configured in next.config.js */}
+              <img 
+                src={`/${images[currentIndex].src}`} 
+                alt={images[currentIndex].label}
+                className="w-full h-full object-cover object-top opacity-90 hover:opacity-100 transition-opacity"
+              />
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
+        {/* Navigation Overlays (Show on Hover) */}
+        {images.length > 1 && (
+          <div className="absolute inset-0 z-30 pointer-events-none flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            <button 
+              onClick={handlePrev}
+              className="pointer-events-auto w-8 h-8 rounded-full bg-background/80 border border-white/10 backdrop-blur-md flex items-center justify-center text-primary hover:bg-surface hover:scale-110 transition-all"
+            >
+              <ChevronLeft className="w-4 h-4" />
+            </button>
+            <button 
+              onClick={handleNext}
+              className="pointer-events-auto w-8 h-8 rounded-full bg-background/80 border border-white/10 backdrop-blur-md flex items-center justify-center text-primary hover:bg-surface hover:scale-110 transition-all"
+            >
+              <ChevronRight className="w-4 h-4" />
+            </button>
+          </div>
+        )}
       </div>
 
-      {/* Premium Tab Navigation */}
-      <div className="flex flex-wrap gap-2">
-        {images.map((img, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentIndex(idx)}
-            className={cn(
-              "px-3 py-1.5 rounded-md text-[11px] font-mono tracking-widest uppercase transition-all duration-300 border focus:outline-none",
-              currentIndex === idx
-                ? "bg-accent/20 border-accent/50 text-primary shadow-[0_0_10px_rgba(124,58,237,0.2)]"
-                : "bg-surface border-white/5 text-secondary hover:text-primary hover:border-white/20 hover:bg-surfaceHover"
-            )}
-          >
-            {img.label}
-          </button>
-        ))}
-      </div>
+      {/* Thumbnail Strip */}
+      {images.length > 1 && (
+        <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
+          {images.map((img, idx) => (
+            <button
+              key={idx}
+              onClick={() => setCurrentIndex(idx)}
+              className={`relative h-12 w-20 shrink-0 rounded-md overflow-hidden border transition-all duration-300 ${
+                currentIndex === idx ? "border-accent ring-1 ring-accent/50" : "border-white/10 opacity-50 hover:opacity-100"
+              }`}
+            >
+              <img src={`/${img.src}`} alt={img.label} className="w-full h-full object-cover" />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
