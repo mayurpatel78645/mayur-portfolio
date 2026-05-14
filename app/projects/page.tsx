@@ -46,8 +46,8 @@ export default function Projects() {
           problem="Restaurants struggle with physical menu limitations, making customers wait and complicating inventory updates."
           solution="A live synchronized mobile-first menu platform with real-time updates and an operational command center for staff."
           stack={["Next.js", "React", "Supabase", "PostgreSQL", "TailwindCSS"]}
-          demoUrl="https://your-demo-link.com"
-          githubUrl="https://github.com/your-repo"
+          demoUrl="https://smart-qr-menu-omega.vercel.app/"
+          githubUrl="https://github.com/mayurpatel78645/smart-qr-menu"
           highlights={[
             "Integrated Supabase Realtime for automatic cross-device syncing.",
             "Built a low-latency, mobile-first UI for immediate customer access.",
@@ -69,7 +69,7 @@ export default function Projects() {
           problem="Social media is saturated with unchecked, highly viral misinformation that users struggle to critically evaluate in real-time."
           solution="An AI-powered Chrome extension that actively monitors DOM mutations on Instagram, using regex heuristics and the Gemini API to detect, verify, and flag suspicious claims on the fly."
           stack={["JavaScript", "Chrome API", "Gemini API", "DOM Observers", "HTML/CSS"]}
-          githubUrl="https://github.com/mayurpatel78645"
+          githubUrl="https://github.com/mayurpatel78645/tathya-satyapan"
           highlights={[
             "Engineered a highly performant DOM monitoring system using MutationObserver and IntersectionObserver.",
             "Implemented a local caching system and request queues to aggressively rate-limit expensive API calls.",
