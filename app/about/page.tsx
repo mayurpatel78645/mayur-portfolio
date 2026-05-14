@@ -93,7 +93,7 @@ export default function About() {
                       isEven ? "md:justify-end" : "justify-start"
                     )}>
                       {node.metrics.map((metric, i) => (
-                        <span key={i} className="px-2.5 py-1 text-[11px] font-mono tracking-wider uppercase border border-white/10 bg-surface rounded-md text-primary/80">
+                        <span key={i} className="px-2.5 py-1 text-[11px] font-mono tracking-wider uppercase border border-primary/10 bg-surface rounded-md text-primary/80">
                           {metric}
                         </span>
                       ))}
@@ -116,7 +116,7 @@ export default function About() {
       >
         <h3 className="text-2xl font-medium mb-6">Ready to see the execution?</h3>
         <div className="flex gap-4">
-          <Link href="/projects" className="flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-md font-medium transition-all hover:bg-white/90 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]">
+          <Link href="/projects" className="flex items-center gap-2 bg-primary text-background px-6 py-3 rounded-md font-medium transition-all hover:bg-opacity/90 hover:scale-[1.02] shadow-[0_0_20px_rgba(255,255,255,0.1)]">
             View Engineering Case Studies
             <ArrowRight className="w-4 h-4" />
           </Link>

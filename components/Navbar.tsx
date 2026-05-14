@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Command } from "lucide-react";
+import ThemeToggle from "./ThemeToggle"; // Adjust this path if needed!
 
 const navItems = [
   { path: "/", label: "Home" },
@@ -21,7 +22,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-white/5">
+    <nav className="fixed top-0 left-0 w-full z-50 bg-background/80 backdrop-blur-md border-b border-border-subtle transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-24 h-16 flex items-center justify-between">
         <Link href="/" className="font-mono text-sm font-semibold tracking-wider text-primary">
           MAYUR<span className="text-accent">.</span>PATEL
@@ -42,24 +43,33 @@ export default function Navbar() {
             </Link>
           ))}
           
-          {/* Desktop UI Hint - Now clickable! */}
-          <button 
-            onClick={openCommandPalette}
-            className="flex items-center gap-1 px-2 py-1 bg-surface border border-white/5 hover:border-white/20 transition-colors rounded text-xs text-secondary font-mono"
-            aria-label="Open Command Palette"
-          >
-            <span>⌘</span><span>K</span>
-          </button>
+          {/* Desktop Utilities Container */}
+          <div className="flex items-center gap-4 ml-2 border-l border-border-strong pl-6 dark:border-border-subtle">
+            <ThemeToggle />
+            
+            {/* Desktop UI Hint - Now clickable! */}
+            <button 
+              onClick={openCommandPalette}
+              className="flex items-center gap-1 px-2 py-1 bg-surface border border-border-strong dark:border-border-subtle hover:border-primary/20 transition-colors rounded text-xs text-secondary font-mono shadow-sm"
+              aria-label="Open Command Palette"
+            >
+              <span>⌘</span><span>K</span>
+            </button>
+          </div>
         </div>
 
         {/* MOBILE NAVIGATION TRIGGER (Hidden on desktop) */}
-        <button 
-          onClick={openCommandPalette}
-          className="md:hidden flex items-center gap-2 px-3 py-2 rounded-lg bg-surface border border-white/10 text-primary active:scale-95 transition-all shadow-sm"
-        >
-          <Command className="w-4 h-4 text-accent" />
-          <span className="text-xs font-medium">Menu</span>
-        </button>
+        <div className="md:hidden flex items-center gap-3">
+          <ThemeToggle />
+          
+          <button 
+            onClick={openCommandPalette}
+            className="flex items-center gap-2 px-3 py-2 rounded-lg bg-surface border border-border-strong dark:border-border-subtle text-primary active:scale-95 transition-all shadow-sm"
+          >
+            <Command className="w-4 h-4 text-accent" />
+            <span className="text-xs font-medium">Menu</span>
+          </button>
+        </div>
 
       </div>
     </nav>

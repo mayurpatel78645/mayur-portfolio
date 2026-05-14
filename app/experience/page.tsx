@@ -94,7 +94,6 @@ const EXPERIENCE_DATA = [
   }
 ];
 
-// --- PRIORITY 13: THE VERIFICATIONS COMPONENT ---
 function VerificationsSection() {
   const recommendations = [
     {
@@ -122,7 +121,8 @@ function VerificationsSection() {
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-100px" }}
-      className="mt-32 pt-24 border-t border-white/5"
+      // FIX: Adaptive top border
+      className="mt-32 pt-24 border-t border-border-subtle"
     >
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-6">
         <div>
@@ -138,18 +138,22 @@ function VerificationsSection() {
         {recommendations.map((rec, index) => (
           <div 
             key={index} 
-            className="p-8 rounded-2xl bg-surface/20 border border-white/5 relative flex flex-col justify-between group hover:bg-surface/40 hover:border-white/10 transition-all duration-500 shadow-inner"
+            // FIX: Adaptive card background, borders, and shadows
+            className="p-8 rounded-2xl bg-surface/50 dark:bg-surface/20 border border-border-subtle relative flex flex-col justify-between group hover:bg-surface dark:hover:bg-surface/40 hover:border-border-strong transition-all duration-500 shadow-sm dark:shadow-inner"
           >
-            <Quote className="absolute top-6 right-6 w-12 h-12 text-white/5 -z-10 group-hover:text-accent/5 transition-colors duration-500" />
+            {/* FIX: Primary color for quote icon instead of hardcoded white */}
+            <Quote className="absolute top-6 right-6 w-12 h-12 text-primary/5 -z-10 group-hover:text-accent/10 transition-colors duration-500" />
             
             <p className="text-sm text-secondary leading-loose mb-10 relative z-10 italic">
               "{rec.quote}"
             </p>
             
-            <div className="relative z-10 border-t border-white/5 pt-6 mt-auto flex flex-col items-start">
+            {/* FIX: Adaptive inner border */}
+            <div className="relative z-10 border-t border-border-subtle pt-6 mt-auto flex flex-col items-start">
               <p className="text-primary font-medium text-sm mb-1">{rec.author}</p>
               <p className="text-xs text-secondary mb-4">{rec.title}</p>
-              <span className="inline-block px-2.5 py-1 bg-background border border-white/10 rounded text-[10px] font-mono uppercase tracking-widest text-secondary/70">
+              {/* FIX: Adaptive tag border */}
+              <span className="inline-block px-2.5 py-1 bg-background border border-border-subtle rounded text-[10px] font-mono uppercase tracking-widest text-secondary/70">
                 {rec.context}
               </span>
             </div>
@@ -171,9 +175,9 @@ export default function Experience() {
         </p>
       </div>
 
-      {/* THE TIMELINE */}
       <div className="flex flex-col gap-12 relative max-w-4xl mx-auto">
-        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-white/10 via-white/5 to-transparent md:block hidden" />
+        {/* FIX: Vertical line now uses border variables to stay visible in light mode */}
+        <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-border-strong via-border-subtle to-transparent md:block hidden" />
 
         {EXPERIENCE_DATA.map((job, index) => (
           <motion.div
@@ -184,7 +188,8 @@ export default function Experience() {
             transition={{ duration: 0.4, delay: index * 0.05 }}
             className="group relative flex flex-col md:flex-row gap-4 md:gap-12 md:pl-8"
           >
-            <div className="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-surface border border-white/20 group-hover:border-accent group-hover:bg-accent transition-colors duration-300 md:block hidden" />
+            {/* FIX: Timeline dots adapt border color */}
+            <div className="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-surface border border-border-strong group-hover:border-accent group-hover:bg-accent transition-colors duration-300 md:block hidden" />
 
             <div className="md:w-1/4 flex flex-col gap-2 shrink-0 pt-1">
               <span className="text-sm font-mono text-primary/80">{job.date}</span>
@@ -194,14 +199,17 @@ export default function Experience() {
               <span className={cn(
                 "mt-2 text-[10px] uppercase tracking-widest font-mono w-max px-2 py-0.5 rounded-sm border",
                 job.category === "Engineering" ? "bg-accent/10 border-accent/20 text-accent" : 
-                job.category === "Operational Leadership" ? "bg-orange-500/10 border-orange-500/20 text-orange-400" :
-                "bg-surface border-white/10 text-secondary"
+                // Enhanced contrast for orange in light mode
+                job.category === "Operational Leadership" ? "bg-orange-500/10 border-orange-500/20 text-orange-600 dark:text-orange-400" :
+                // FIX: Standard category border
+                "bg-surface border-border-subtle text-secondary"
               )}>
                 {job.category}
               </span>
             </div>
 
-            <div className="md:w-3/4 flex flex-col pb-8 border-b border-white/5 group-last:border-0">
+            {/* FIX: Item divider bottom border */}
+            <div className="md:w-3/4 flex flex-col pb-8 border-b border-border-subtle group-last:border-0">
               <h3 className="text-xl font-semibold text-primary">{job.role}</h3>
               <h4 className="text-base text-secondary mb-4 font-medium flex items-center gap-1">
                 {job.company} <ArrowUpRight className="w-3 h-3 opacity-50" />
@@ -210,7 +218,8 @@ export default function Experience() {
               <ul className="flex flex-col gap-3 mb-6">
                 {job.bullets.map((bullet, i) => (
                   <li key={i} className="flex items-start gap-3">
-                    <span className="text-white/20 mt-1.5 text-[10px]">■</span>
+                    {/* FIX: Bullet points adapt so they don't vanish in light mode */}
+                    <span className="text-primary/20 mt-1.5 text-[10px]">■</span>
                     <span className="text-sm text-secondary/90 leading-relaxed">{bullet}</span>
                   </li>
                 ))}
@@ -218,7 +227,8 @@ export default function Experience() {
 
               <div className="flex flex-wrap gap-2">
                 {job.skills.map((skill, i) => (
-                  <span key={i} className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-surface border border-white/5 rounded-md text-secondary group-hover:border-white/10 transition-colors">
+                  // FIX: Skill tags get adaptive borders
+                  <span key={i} className="px-2.5 py-1 text-[11px] font-mono uppercase tracking-wider bg-surface border border-border-subtle rounded-md text-secondary group-hover:border-border-strong transition-colors">
                     {skill}
                   </span>
                 ))}
@@ -228,7 +238,6 @@ export default function Experience() {
         ))}
       </div>
 
-      {/* PRIORITY 13: THE VERIFICATIONS SECTION */}
       <VerificationsSection />
 
     </div>

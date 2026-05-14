@@ -6,6 +6,7 @@ import Footer from "../components/Footer";
 import "./globals.css";
 import CommandPalette from "../components/CommandPalette";
 import CursorGlow from "../components/CursorGlow";
+import { Providers } from "./providers";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://mayur-portfolio-two.vercel.app"),
@@ -44,19 +45,23 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`}>
-      {/* We use min-h-screen and flex-col on the body so the main content 
-        flex-grows, pushing the footer perfectly to the bottom of the page 
-        even if the content is short.
-      */}
+    // THE FIX 1: Add suppressHydrationWarning (Required by next-themes)
+    <html lang="en" className={`${GeistSans.variable} ${GeistMono.variable}`} suppressHydrationWarning>
       <body className="flex flex-col min-h-screen">
-        <CursorGlow />
-        <Navbar />
-        <CommandPalette />
-        <main className="flex-grow pt-24 pb-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto w-full">
-          {children}
-        </main>
-        <Footer />
+        
+        {/* THE FIX 2: Wrap EVERYTHING inside the Providers */}
+        <Providers>
+          <CursorGlow />
+          <Navbar />
+          <CommandPalette />
+          
+          <main className="flex-grow pt-24 pb-16 px-6 md:px-12 lg:px-24 max-w-7xl mx-auto w-full">
+            {children}
+          </main>
+          
+          <Footer />
+        </Providers>
+
       </body>
     </html>
   );

@@ -21,8 +21,8 @@ export default function InteractiveNode({ icon, title, subtitle, metadata, statu
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* THE VISUAL NODE */}
-      <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/80 border border-white/10 backdrop-blur-md cursor-crosshair hover:border-accent/50 transition-colors duration-300 relative z-10">
-        <div className="w-10 h-10 rounded-full bg-background border border-white/5 flex items-center justify-center text-primary group-hover:text-accent group-hover:scale-110 transition-all duration-300">
+      <div className="flex items-center gap-4 p-4 rounded-xl bg-surface/80 border border-border-strong backdrop-blur-md cursor-crosshair hover:border-accent/50 transition-colors duration-300 relative z-10">
+        <div className="w-10 h-10 rounded-full bg-background border border-border-subtle flex items-center justify-center text-primary group-hover:text-accent group-hover:scale-110 transition-all duration-300">
           {icon}
         </div>
         <div className="flex flex-col pr-4">
@@ -47,10 +47,10 @@ export default function InteractiveNode({ icon, title, subtitle, metadata, statu
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 5, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="absolute top-full left-0 mt-3 w-64 p-4 rounded-xl bg-surface border border-white/10 shadow-2xl backdrop-blur-xl z-50 pointer-events-none"
+            className="absolute top-full left-0 mt-3 w-64 p-4 rounded-xl bg-surface border border-border-strong shadow-2xl backdrop-blur-xl z-50 pointer-events-none"
           >
             <div className="flex flex-col gap-3">
-              <h4 className="text-[10px] font-mono uppercase tracking-widest text-accent mb-1 border-b border-white/5 pb-2">Node Processing Logic</h4>
+              <h4 className="text-[10px] font-mono uppercase tracking-widest text-accent mb-1 border-b border-border-subtle pb-2">Node Processing Logic</h4>
               
               {metadata.map((data, i) => (
                 <div key={i} className="flex justify-between items-end">
@@ -59,7 +59,7 @@ export default function InteractiveNode({ icon, title, subtitle, metadata, statu
                 </div>
               ))}
               
-              <div className="mt-2 pt-2 border-t border-white/5 flex justify-between items-center">
+              <div className="mt-2 pt-2 border-t border-border-subtle flex justify-between items-center">
                  <span className="text-[9px] font-mono text-secondary/40">Latency</span>
                  <span className="text-[9px] font-mono text-emerald-400">~{Math.floor(Math.random() * 40) + 12}ms</span>
               </div>

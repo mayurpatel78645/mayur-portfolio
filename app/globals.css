@@ -1,16 +1,54 @@
 @import "tailwindcss";
 
-@theme {
-  /* Our Premium Dark Theme Palette */
-  --color-background: #050505;
-  --color-surface: #111111;
-  --color-surfaceHover: #1a1a1a;
-  --color-primary: #ededed;
-  --color-secondary: #a1a1aa;
-  --color-accent: #7c3aed;
-  --color-accent-glow: rgba(124, 58, 237, 0.15);
+@layer base {
+  /* LIGHT MODE */
+  :root {
+    --theme-background: #FAF8F9; /* Slightly crisper off-white */
+    --theme-surface: #FFFFFF;    
+    --theme-surface-hover: #F6F0F2; 
+    
+    --theme-primary: #1A1517;    /* Darker charcoal for premium readability */
+    --theme-secondary: #6B6164;  /* Darker rose-gray */
+    
+    --theme-accent: #D4738D;     
+    --theme-accent-glow: rgba(212, 115, 141, 0.15);
 
-  /* Typography */
+    /* Adaptive Borders for Light Mode */
+    --theme-border-subtle: rgba(0, 0, 0, 0.06);
+    --theme-border-strong: rgba(0, 0, 0, 0.15);
+  }
+
+  /* DARK MODE */
+  .dark {
+    --theme-background: #050505;
+    --theme-surface: #111111;
+    --theme-surface-hover: #1a1a1a;
+    
+    --theme-primary: #ededed;
+    --theme-secondary: #a1a1aa;
+    
+    --theme-accent: #7c3aed;
+    --theme-accent-glow: rgba(124, 58, 237, 0.15);
+
+    /* Adaptive Borders for Dark Mode */
+    --theme-border-subtle: rgba(255, 255, 255, 0.05);
+    --theme-border-strong: rgba(255, 255, 255, 0.1);
+  }
+}
+
+@theme {
+  --color-background: var(--theme-background);
+  --color-surface: var(--theme-surface);
+  --color-surfaceHover: var(--theme-surface-hover);
+  --color-primary: var(--theme-primary);
+  --color-secondary: var(--theme-secondary);
+  --color-accent: var(--theme-accent);
+  --color-accent-glow: var(--theme-accent-glow);
+
+  /* Map the new borders */
+  --color-border-subtle: var(--theme-border-subtle);
+  --color-border-strong: var(--theme-border-strong);
+
   --font-sans: var(--font-geist-sans), Inter, sans-serif;
   --font-mono: var(--font-geist-mono), monospace;
 }
@@ -21,25 +59,27 @@
     color: var(--color-primary);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    /* This creates the smooth fade when clicking the toggle */
+    transition: background-color 0.5s ease, color 0.5s ease;
   }
   
   ::selection {
     background-color: var(--color-accent);
-    color: white;
+    color: var(--color-background); /* Dynamic contrast text */
   }
 }
 
-/* Custom scrollbar for premium feel */
-::-webkit-scrollbar {
-  width: 8px;
+/* Custom scrollbar tied to dynamic variables */
+::-webkit-scrollbar { 
+  width: 8px; 
 }
-::-webkit-scrollbar-track {
-  background: #050505;
+::-webkit-scrollbar-track { 
+  background: var(--color-background); 
 }
-::-webkit-scrollbar-thumb {
-  background: #27272a;
-  border-radius: 4px;
+::-webkit-scrollbar-thumb { 
+  background: var(--color-surfaceHover); 
+  border-radius: 4px; 
 }
-::-webkit-scrollbar-thumb:hover {
-  background: #3f3f46;
+::-webkit-scrollbar-thumb:hover { 
+  background: var(--color-secondary); 
 }

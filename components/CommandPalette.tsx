@@ -57,15 +57,15 @@ export default function CommandPalette() {
       <div className="fixed inset-0" onClick={() => setOpen(false)} />
       
       <Command 
-        className="relative w-full max-w-2xl bg-surface border border-white/10 rounded-xl shadow-2xl overflow-hidden"
+        className="relative w-full max-w-2xl bg-surface border border-border-strong rounded-xl shadow-2xl overflow-hidden"
       >
-        <div className="flex items-center border-b border-white/5 px-4">
+        <div className="flex items-center border-b border-border-subtle px-4">
           <Command.Input 
             autoFocus
             placeholder="Type a command or search..." 
             className="w-full py-4 bg-transparent text-primary outline-none placeholder:text-secondary text-lg"
           />
-          <span className="text-xs text-secondary font-mono border border-white/10 px-2 py-1 rounded bg-background">ESC</span>
+          <span className="text-xs text-secondary font-mono border border-border-strong px-2 py-1 rounded bg-background">ESC</span>
         </div>
 
         <Command.List className="max-h-[50dvh] md:max-h-[400px] overflow-y-auto p-2 scroll-smooth">
@@ -80,7 +80,7 @@ export default function CommandPalette() {
             <CommandItem onSelect={() => runCommand(() => router.push("/experience"))} icon={<Briefcase className="w-4 h-4" />} label="Experience" />
           </Command.Group>
 
-          <Command.Group heading="Links" className="text-xs font-mono text-secondary px-2 py-3 mt-2 border-t border-white/5">
+          <Command.Group heading="Links" className="text-xs font-mono text-secondary px-2 py-3 mt-2 border-t border-border-subtle">
             <CommandItem onSelect={() => runCommand(() => window.open("https://github.com/mayurpatel78645", "_blank"))} icon={<GithubIcon />} label="GitHub" />
             <CommandItem onSelect={() => runCommand(() => window.open("https://www.linkedin.com/in/mayur-patel-762087216/", "_blank"))} icon={<LinkedinIcon />} label="LinkedIn" />
             <CommandItem onSelect={() => runCommand(() => window.open("mailto:mayurpatel78645@gmail.com"))} icon={<Mail className="w-4 h-4" />} label="Email" />
@@ -104,7 +104,7 @@ function CommandItem({ onSelect, icon, label, meta }: { onSelect: () => void, ic
   return (
     <Command.Item 
       onSelect={onSelect} 
-      className="flex items-center justify-between px-3 py-3 mt-1 text-sm text-primary rounded-md cursor-pointer aria-selected:bg-white/5 aria-selected:text-accent transition-colors group"
+      className="flex items-center justify-between px-3 py-3 mt-1 text-sm text-primary rounded-md cursor-pointer aria-selected:bg-primary/5 aria-selected:text-accent transition-colors group"
     >
       <div className="flex items-center gap-3">
         {icon} {label}

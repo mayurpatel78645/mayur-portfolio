@@ -19,7 +19,7 @@ export default function Projects() {
         </div>
 
         {/* The Premium Audience Toggle */}
-        <div className="flex items-center gap-2 p-1 rounded-lg bg-surface border border-white/10 w-fit shrink-0">
+        <div className="flex items-center gap-2 p-1 rounded-lg bg-surface border border-primary/10 w-fit shrink-0">
           <button
             onClick={() => setIsTechnicalMode(false)}
             className={`flex items-center gap-2 px-4 py-2 rounded-md text-xs font-mono uppercase tracking-widest transition-all duration-300 ${
@@ -152,7 +152,8 @@ export default function Projects() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-32 p-8 md:p-12 rounded-2xl bg-gradient-to-b from-surface/20 to-transparent border border-white/5 relative overflow-hidden group"
+          // FIX: Added adaptive background (bg-surface/80), adaptive borders (border-border-subtle), and a soft drop shadow for light mode.
+          className="mt-32 p-8 md:p-12 rounded-2xl bg-surface/80 dark:bg-gradient-to-b dark:from-surface/20 dark:to-transparent border border-border-subtle shadow-sm dark:shadow-none relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 p-8 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
@@ -171,7 +172,8 @@ export default function Projects() {
 
           <div className="flex flex-wrap gap-2.5">
             {["FastAPI", "Vector Embeddings", "PostgreSQL", "Playwright", "LLM Orchestration"].map(tech => (
-              <span key={tech} className="px-3 py-1.5 bg-background/50 border border-white/5 rounded flex items-center text-[10px] uppercase tracking-wider text-secondary/70 font-mono cursor-default group-hover:border-white/10 transition-colors">
+              // FIX: Replaced bg-background/50 and border-white/5 with adaptive colors
+              <span key={tech} className="px-3 py-1.5 bg-surface dark:bg-background/50 border border-border-subtle rounded flex items-center text-[10px] uppercase tracking-wider text-secondary/70 font-mono cursor-default group-hover:border-border-strong transition-colors">
                 {tech}
               </span>
             ))}
@@ -195,7 +197,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
       viewport={{ once: true, margin: "-100px" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-b border-white/10 pb-32 last:border-0 group relative scroll-mt-32"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-b border-primary/10 pb-32 last:border-0 group relative scroll-mt-32"
     >
       {/* LEFT COLUMN: Sticky Narrative & CTAs */}
       <div className="lg:col-span-4 relative">
@@ -234,12 +236,12 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 pt-2">
             {githubUrl && (
-              <a href={githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-surface hover:bg-surfaceHover border border-white/10 px-5 py-2.5 rounded-lg transition-colors">
+              <a href={githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-surface hover:bg-surfaceHover border border-primary/10 px-5 py-2.5 rounded-lg transition-colors">
                 <GitBranch className="w-4 h-4" /> Repository
               </a>
             )}
             {demoUrl && (
-              <a href={demoUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-primary text-background px-5 py-2.5 rounded-lg transition-all hover:bg-white/90 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+              <a href={demoUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-primary text-background px-5 py-2.5 rounded-lg transition-all hover:bg-opacity/90 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
                 <ExternalLink className="w-4 h-4" /> Live Demo
               </a>
             )}
@@ -267,7 +269,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
         </div>
 
         {/* 2. ARCHITECTURE DIAGRAM */}
-        <div className="bg-surface/50 border border-white/5 rounded-xl p-6 relative overflow-hidden transition-colors duration-500 group-hover:border-white/10 group-hover:bg-surface">
+        <div className="bg-surface/50 border border-white/5 rounded-xl p-6 relative overflow-hidden transition-colors duration-500 group-hover:border-primary/10 group-hover:bg-surface">
            <div className="absolute top-0 right-0 p-4 z-20">
               <span className="text-[10px] uppercase font-mono tracking-widest text-secondary/50">System Architecture</span>
            </div>
@@ -275,7 +277,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
         </div>
 
         {/* 3. TECHNICAL IMPLEMENTATION */}
-        <div className="bg-surface/30 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/50 group-hover:border-white/10">
+        <div className="bg-surface/30 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/50 group-hover:border-primary/10">
           <h3 className="text-sm font-mono uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent/80" />
             Technical Implementation
@@ -292,7 +294,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
 
           <div className="mt-10 pt-6 border-t border-white/5 flex flex-wrap gap-2.5">
             {stack.map((tech: string) => (
-              <span key={tech} className="px-3 py-1.5 bg-background border border-white/10 rounded flex items-center text-[11px] uppercase tracking-wider text-secondary font-mono cursor-default">
+              <span key={tech} className="px-3 py-1.5 bg-background border border-primary/10 rounded flex items-center text-[11px] uppercase tracking-wider text-secondary font-mono cursor-default">
                 {tech}
               </span>
             ))}
@@ -301,7 +303,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
 
         {/* 4. ARCHITECTURAL TRADEOFFS */}
         {tradeoffs && tradeoffs.length > 0 && (
-          <div className="bg-surface/20 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/30 group-hover:border-white/10 mt-[-2rem]">
+          <div className="bg-surface/20 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/30 group-hover:border-primary/10 mt-[-2rem]">
             <h3 className="text-sm font-mono uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-secondary/50" />
               Architectural Tradeoffs

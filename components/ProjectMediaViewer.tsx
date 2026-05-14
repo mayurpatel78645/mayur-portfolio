@@ -16,16 +16,16 @@ export default function ProjectMediaViewer({ images }: { images: { src: string; 
   return (
     <div className="flex flex-col gap-4">
       {/* THE MAC OS WINDOW WRAPPER */}
-      <div className="relative w-full aspect-[16/10] rounded-xl bg-surface border border-white/10 shadow-2xl overflow-hidden group">
+      <div className="relative w-full aspect-[16/10] rounded-xl bg-surface border border-border-strong shadow-2xl overflow-hidden group">
         
         {/* Fake Browser/Window Header */}
-        <div className="absolute top-0 left-0 right-0 h-10 bg-surface/80 backdrop-blur-md border-b border-white/5 flex items-center px-4 z-20">
+        <div className="absolute top-0 left-0 right-0 h-10 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex items-center px-4 z-20">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
             <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
           </div>
-          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 rounded bg-background/50 border border-white/5">
+          <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1 rounded bg-background/50 border border-border-subtle">
             <span className="text-[10px] font-mono text-secondary/60 tracking-widest uppercase">
               {images[currentIndex].label}
             </span>
@@ -58,13 +58,13 @@ export default function ProjectMediaViewer({ images }: { images: { src: string; 
           <div className="absolute inset-0 z-30 pointer-events-none flex items-center justify-between px-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <button 
               onClick={handlePrev}
-              className="pointer-events-auto w-8 h-8 rounded-full bg-background/80 border border-white/10 backdrop-blur-md flex items-center justify-center text-primary hover:bg-surface hover:scale-110 transition-all"
+              className="pointer-events-auto w-8 h-8 rounded-full bg-background/80 border border-border-strong backdrop-blur-md flex items-center justify-center text-primary hover:bg-surface hover:scale-110 transition-all"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
             <button 
               onClick={handleNext}
-              className="pointer-events-auto w-8 h-8 rounded-full bg-background/80 border border-white/10 backdrop-blur-md flex items-center justify-center text-primary hover:bg-surface hover:scale-110 transition-all"
+              className="pointer-events-auto w-8 h-8 rounded-full bg-background/80 border border-border-strong backdrop-blur-md flex items-center justify-center text-primary hover:bg-surface hover:scale-110 transition-all"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -80,7 +80,7 @@ export default function ProjectMediaViewer({ images }: { images: { src: string; 
               key={idx}
               onClick={() => setCurrentIndex(idx)}
               className={`relative h-12 w-20 shrink-0 rounded-md overflow-hidden border transition-all duration-300 ${
-                currentIndex === idx ? "border-accent ring-1 ring-accent/50" : "border-white/10 opacity-50 hover:opacity-100"
+                currentIndex === idx ? "border-accent ring-1 ring-accent/50" : "border-border-strong opacity-50 hover:opacity-100"
               }`}
             >
               <img src={`/${img.src}`} alt={img.label} className="w-full h-full object-cover" />

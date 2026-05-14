@@ -97,7 +97,7 @@ export default function ArchitectureDiagram({ type, isHovered }: { type: 'direct
                     "relative flex items-center gap-4 px-6 py-4 rounded-xl border backdrop-blur-md transition-all duration-300 w-60",
                     isFocused 
                       ? "bg-accent/10 border-accent/40 shadow-[inset_0_0_20px_rgba(124,58,237,0.1),0_0_15px_rgba(124,58,237,0.2)]" 
-                      : "bg-surface/80 border-white/5 shadow-xl hover:border-white/10"
+                      : "bg-surface/80 border-border-subtle shadow-xl hover:border-border-strong"
                   )}
                 >
                   <node.icon className={cn("w-6 h-6 shrink-0 transition-colors duration-300", isFocused ? "text-accent" : "text-secondary")} />
@@ -133,7 +133,7 @@ export default function ArchitectureDiagram({ type, isHovered }: { type: 'direct
 
       {/* THE UPGRADED TELEMETRY HUD */}
       <div className="relative z-10 w-full max-w-[280px] mt-10">
-        <div className="min-h-[140px] p-5 rounded-xl bg-background/90 border border-white/10 shadow-[0_0_30px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden backdrop-blur-xl">
+        <div className="min-h-[140px] p-5 rounded-xl bg-background/90 border border-border-strong shadow-[0_0_30px_rgba(0,0,0,0.5)] flex flex-col relative overflow-hidden backdrop-blur-xl">
           <AnimatePresence mode="wait">
             {hoveredNode !== null ? (
               <motion.div
@@ -144,7 +144,7 @@ export default function ArchitectureDiagram({ type, isHovered }: { type: 'direct
                 transition={{ duration: 0.2 }}
                 className="flex flex-col h-full"
               >
-                <div className="flex justify-between items-start mb-3 border-b border-white/5 pb-3">
+                <div className="flex justify-between items-start mb-3 border-b border-border-subtle pb-3">
                   <div className="text-[10px] uppercase font-mono tracking-widest text-accent flex items-center gap-2">
                     <Activity className="w-3 h-3 opacity-70 animate-pulse" />
                     {nodes[hoveredNode].label}
