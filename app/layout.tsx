@@ -8,8 +8,37 @@ import CommandPalette from "../components/CommandPalette";
 import CursorGlow from "../components/CursorGlow";
 
 export const metadata: Metadata = {
-  title: "Mayur Patel | Software Engineer",
-  description: "Full-stack engineer focused on automation, AI systems, and operational architecture.",
+  title: "Mayur Patel | Systems Engineer",
+  description: "Full-stack engineer focused on AI systems, scalable infrastructure, and automation. Translating a decade of operational leadership into resilient software architecture.",
+  keywords: ["Software Engineer", "Full-Stack Developer", "AI Systems", "React", "Next.js", "Python", "FastAPI"],
+  authors: [{ name: "Mayur Patel" }],
+  creator: "Mayur Patel",
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://mayur-patel.vercel.app", // Update this to your actual Vercel domain!
+    title: "Mayur Patel | Systems Engineer",
+    description: "Building systems that reduce human effort. Explore my case studies in AI pipelines, real-time sync, and scalable architecture.",
+    siteName: "Mayur Patel Portfolio",
+    images: [
+      {
+        url: "/og-image.png", // We will create this next
+        width: 1200,
+        height: 630,
+        alt: "Mayur Patel - Engineering Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mayur Patel | Systems Engineer",
+    description: "Full-stack engineer focused on AI systems, scalable infrastructure, and automation.",
+    images: ["/og-image.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
