@@ -59,7 +59,7 @@ export default function CommandPalette() {
           <span className="text-xs text-secondary font-mono border border-white/10 px-2 py-1 rounded bg-background">ESC</span>
         </div>
 
-        <Command.List className="max-h-[400px] overflow-y-auto p-2 scroll-smooth">
+        <Command.List className="max-h-[50dvh] md:max-h-[400px] overflow-y-auto p-2 scroll-smooth">
           <Command.Empty className="py-12 text-center text-sm text-secondary">
             No results found.
           </Command.Empty>

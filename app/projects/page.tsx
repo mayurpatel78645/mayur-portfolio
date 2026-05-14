@@ -158,7 +158,7 @@ function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, 
       viewport={{ once: true, margin: "-100px" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 border-b border-white/10 pb-32 last:border-0 group relative scroll-mt-32"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-b border-white/10 pb-32 last:border-0 group relative scroll-mt-32"
     >
       {/* LEFT COLUMN: Sticky Narrative & CTAs */}
       <div className="lg:col-span-4 relative">

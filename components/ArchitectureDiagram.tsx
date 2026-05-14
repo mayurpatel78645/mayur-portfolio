@@ -82,6 +82,8 @@ export default function ArchitectureDiagram({ type, isHovered }: { type: 'direct
                 className="relative group cursor-crosshair z-20"
                 onMouseEnter={() => setHoveredNode(index)}
                 onMouseLeave={() => setHoveredNode(null)}
+                onClick={() => setHoveredNode(hoveredNode === index ? null : index)}
+                onTouchStart={() => setHoveredNode(hoveredNode === index ? null : index)}
               >
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
