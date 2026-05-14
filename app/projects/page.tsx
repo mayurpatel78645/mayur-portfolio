@@ -2,26 +2,56 @@
 
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { GitBranch, ExternalLink, MonitorPlay } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+// FIX: Added UserCheck and Cpu to the imports
+import { GitBranch, ExternalLink, MonitorPlay, UserCheck, Cpu } from "lucide-react";
 import ProjectMediaViewer from "@/components/ProjectMediaViewer";
 
 export default function Projects() {
+  const [isTechnicalMode, setIsTechnicalMode] = useState(true);
+  
   return (
     <div className="max-w-5xl mx-auto">
-      <div className="mb-16">
-        <h1 className="text-4xl md:text-5xl font-semibold mb-4">Engineering Portfolio</h1>
-        <p className="text-xl text-secondary">Systems built to automate, scale, and solve real-world inefficiencies.</p>
+      <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div>
+          <h1 className="text-4xl md:text-5xl font-semibold mb-4 tracking-tight">Engineering Portfolio</h1>
+          <p className="text-xl text-secondary">Systems built to automate, scale, and solve real-world inefficiencies.</p>
+        </div>
+
+        {/* The Premium Audience Toggle */}
+        <div className="flex items-center gap-2 p-1 rounded-lg bg-surface border border-white/10 w-fit shrink-0">
+          <button
+            onClick={() => setIsTechnicalMode(false)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md text-xs font-mono uppercase tracking-widest transition-all duration-300 ${
+              !isTechnicalMode ? "bg-white/10 text-primary shadow-sm" : "text-secondary/50 hover:text-secondary"
+            }`}
+          >
+            <UserCheck className="w-3.5 h-3.5" />
+            Executive
+          </button>
+          <button
+            onClick={() => setIsTechnicalMode(true)}
+            className={`flex items-center gap-2 px-4 py-2 rounded-md text-xs font-mono uppercase tracking-widest transition-all duration-300 ${
+              isTechnicalMode ? "bg-accent/20 text-accent shadow-sm" : "text-secondary/50 hover:text-secondary"
+            }`}
+          >
+            <Cpu className="w-3.5 h-3.5" />
+            Engineering
+          </button>
+        </div>
       </div>
 
       <div className="space-y-24">
-        {/* THE DIRECTOR - Centerpiece */}
+        {/* THE DIRECTOR */}
         <ProjectCaseStudy 
           type="director"
           title="The Director"
           category="AI Systems & Video Processing Pipeline"
           problem="Manually indexing and editing multi-hour video files creates a massive operational bottleneck. Traditional NLEs (Non-Linear Editors) require real-time human review, making high-volume content pipelines impossible to scale efficiently."          
           solution="A decoupled, asynchronous processing engine. A FastAPI backend handles FFmpeg chunking to bypass memory limits, while a concurrent LLM pipeline analyzes transcripts for narrative spikes. Output is dynamically serialized into FCPXML math for direct DaVinci Resolve timeline injection."          
+          // FIX: Added executiveSummary and isTechnicalMode
+          executiveSummary="An automated video editing system that saves hundreds of hours of manual labor. It takes massive, multi-hour raw video files, automatically finds the most engaging moments using AI, and prepares them directly for the final video editor to publish."
+          isTechnicalMode={isTechnicalMode}
           stack={["Python", "FastAPI", "Next.js", "TypeScript", "Google Gemini API", "FFmpeg", "Concurrent Futures"]}
           githubUrl="https://github.com/mayurpatel78645/the-director-backend"
           highlights={[
@@ -54,6 +84,9 @@ export default function Projects() {
           category="Realtime Operations Platform"
           problem="Traditional hospitality systems suffer from high operational latency between inventory changes and customer-facing menus. This leads to 'out-of-stock' friction and inefficient manual reconciliation across distributed staff devices."
           solution="A real-time synchronization engine built on Supabase. By leveraging PostgreSQL's Write-Ahead Log (WAL) and WebSocket broadcasting, I achieved <100ms state updates across the ecosystem."
+          // FIX: Added executiveSummary and isTechnicalMode
+          executiveSummary="A live restaurant menu that automatically updates on customers' phones the second an item sells out in the kitchen. It eliminates the frustration of ordering unavailable food and drastically speeds up table turnover."
+          isTechnicalMode={isTechnicalMode}
           stack={["Next.js", "React", "Supabase", "PostgreSQL", "TailwindCSS"]}
           demoUrl="https://smart-qr-menu-omega.vercel.app/"
           githubUrl="https://github.com/mayurpatel78645/smart-qr-menu"
@@ -87,6 +120,9 @@ export default function Projects() {
           category="Browser Extension & AI Verification Engine"
           problem="Social media is saturated with unchecked, highly viral misinformation that users struggle to critically evaluate in real-time."
           solution="An AI-powered Chrome extension that actively monitors DOM mutations on Instagram, using regex heuristics and the Gemini API to detect, verify, and flag suspicious claims on the fly."
+          // FIX: Added executiveSummary and isTechnicalMode
+          executiveSummary="A browser tool that automatically fact-checks Instagram in real-time. It reads the claims made in posts, compares them against a verified AI database, and places a clear warning badge on the screen to protect users from misinformation."
+          isTechnicalMode={isTechnicalMode}
           stack={["JavaScript", "Chrome API", "Gemini API", "DOM Observers", "HTML/CSS"]}
           githubUrl="https://github.com/mayurpatel78645/tathya-satyapan"
           highlights={[
@@ -111,13 +147,13 @@ export default function Projects() {
           ]}
         />
 
+        {/* ACTIVE RESEARCH */}
         <motion.section
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="mt-32 p-8 md:p-12 rounded-2xl bg-gradient-to-b from-surface/20 to-transparent border border-white/5 relative overflow-hidden group"
         >
-          {/* Subtle animated Live indicator */}
           <div className="absolute top-0 right-0 p-8 flex items-center gap-2">
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75"></span>
@@ -147,7 +183,8 @@ export default function Projects() {
   );
 }
 
-function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, githubUrl, highlights, tradeoffs, type, media }: any) {
+// FIX: Added executiveSummary and isTechnicalMode to the component props
+function ProjectCaseStudy({ title, category, problem, solution, executiveSummary, stack, demoUrl, githubUrl, highlights, tradeoffs, type, media, isTechnicalMode }: any) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -173,10 +210,24 @@ function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, 
                 <strong className="text-primary block mb-2 text-sm uppercase tracking-wider font-mono">The Problem</strong>
                 <p className="leading-relaxed text-sm md:text-base">{problem}</p>
               </div>
-              <div>
-                <strong className="text-primary block mb-2 text-sm uppercase tracking-wider font-mono">The Architecture</strong>
-                <p className="leading-relaxed text-sm md:text-base">{solution}</p>
-              </div>
+              
+              {/* FIX: The Dynamic Text Swap using AnimatePresence */}
+              <AnimatePresence mode="wait">
+                <motion.div 
+                  key={isTechnicalMode ? 'tech' : 'exec'}
+                  initial={{ opacity: 0, y: 5 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -5 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <strong className="text-primary block mb-2 text-sm uppercase tracking-wider font-mono">
+                    {isTechnicalMode ? "The Architecture" : "The Business Value"}
+                  </strong>
+                  <p className="leading-relaxed text-sm md:text-base">
+                    {isTechnicalMode ? solution : executiveSummary}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
             </div>
           </div>
 
@@ -248,7 +299,7 @@ function ProjectCaseStudy({ title, category, problem, solution, stack, demoUrl, 
           </div>
         </div>
 
-        {/* 4. ARCHITECTURAL TRADEOFFS (NEW) */}
+        {/* 4. ARCHITECTURAL TRADEOFFS */}
         {tradeoffs && tradeoffs.length > 0 && (
           <div className="bg-surface/20 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/30 group-hover:border-white/10 mt-[-2rem]">
             <h3 className="text-sm font-mono uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
