@@ -3,8 +3,8 @@
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-// FIX: Added UserCheck and Cpu to the imports
-import { GitBranch, ExternalLink, MonitorPlay, UserCheck, Cpu } from "lucide-react";
+// FIX: Added Target for the new metric ribbon
+import { GitBranch, ExternalLink, MonitorPlay, UserCheck, Cpu, Target } from "lucide-react";
 import ProjectMediaViewer from "@/components/ProjectMediaViewer";
 
 export default function Projects() {
@@ -23,7 +23,7 @@ export default function Projects() {
           <button
             onClick={() => setIsTechnicalMode(false)}
             className={`flex items-center gap-2 px-4 py-2 rounded-md text-xs font-mono uppercase tracking-widest transition-all duration-300 ${
-              !isTechnicalMode ? "bg-white/10 text-primary shadow-sm" : "text-secondary/50 hover:text-secondary"
+              !isTechnicalMode ? "bg-primary/10 text-primary shadow-sm" : "text-secondary/50 hover:text-secondary"
             }`}
           >
             <UserCheck className="w-3.5 h-3.5" />
@@ -48,9 +48,11 @@ export default function Projects() {
           title="The Director"
           category="AI Systems & Video Processing Pipeline"
           problem="Manually indexing and editing multi-hour video files creates a massive operational bottleneck. Traditional NLEs (Non-Linear Editors) require real-time human review, making high-volume content pipelines impossible to scale efficiently."          
+          // APPLIED TRUE METRICS
+          metric={isTechnicalMode ? "103s" : "10 Min"}
+          metricLabel={isTechnicalMode ? "Core Engine Processing (668MB Payload)" : "End-to-End Turnaround (vs Hours Manual)"}
           solution="A decoupled, asynchronous processing engine. A FastAPI backend handles FFmpeg chunking to bypass memory limits, while a concurrent LLM pipeline analyzes transcripts for narrative spikes. Output is dynamically serialized into FCPXML math for direct DaVinci Resolve timeline injection."          
-          // FIX: Added executiveSummary and isTechnicalMode
-          executiveSummary="An automated video editing system that saves hundreds of hours of manual labor. It takes massive, multi-hour raw video files, automatically finds the most engaging moments using AI, and prepares them directly for the final video editor to publish."
+          executiveSummary="An automated video editing system that saves hundreds of hours of manual labor. It takes massive raw video files, automatically finds the most engaging moments using AI, and prepares them directly for the final video editor in a fraction of the time."
           isTechnicalMode={isTechnicalMode}
           stack={["Python", "FastAPI", "Next.js", "TypeScript", "Google Gemini API", "FFmpeg", "Concurrent Futures"]}
           githubUrl="https://github.com/mayurpatel78645/the-director-backend"
@@ -83,8 +85,12 @@ export default function Projects() {
           title="SmartQR Menu"
           category="Realtime Operations Platform"
           problem="Traditional hospitality systems suffer from high operational latency between inventory changes and customer-facing menus. This leads to 'out-of-stock' friction and inefficient manual reconciliation across distributed staff devices."
-          solution="A real-time synchronization engine built on Supabase. By leveraging PostgreSQL's Write-Ahead Log (WAL) and WebSocket broadcasting, I achieved <100ms state updates across the ecosystem."
-          // FIX: Added executiveSummary and isTechnicalMode
+          
+          // APPLIED TRUE METRICS
+          metric={isTechnicalMode ? "~1.9s" : "Zero"}
+          metricLabel={isTechnicalMode ? "End-to-End Sync Latency" : "Out-of-Stock Bad Orders"}
+          solution="A real-time synchronization engine built on Supabase. By leveraging PostgreSQL's Write-Ahead Log (WAL) and WebSocket broadcasting, I achieved sub-2-second state updates from the kitchen tablet to the customer's screen over live cellular networks."
+          
           executiveSummary="A live restaurant menu that automatically updates on customers' phones the second an item sells out in the kitchen. It eliminates the frustration of ordering unavailable food and drastically speeds up table turnover."
           isTechnicalMode={isTechnicalMode}
           stack={["Next.js", "React", "Supabase", "PostgreSQL", "TailwindCSS"]}
@@ -98,7 +104,7 @@ export default function Projects() {
           tradeoffs={[
             {
               choice: "Supabase WAL over Redis Pub/Sub",
-              reason: "While Redis offers in-memory speed, Supabase Realtime provided sufficient <100ms sync speeds while keeping the stack unified and maintaining strict relational data integrity for restaurant inventory."
+              reason: "While Redis offers in-memory speed, Supabase Realtime provided sub-2-second sync speeds which is instantaneous for human operations, while keeping the stack unified and maintaining strict relational data integrity for inventory."
             },
             {
               choice: "Client-Side Filtering over Server Rendering",
@@ -118,26 +124,30 @@ export default function Projects() {
           type="tathya"
           title="Tathya-Satyapan"
           category="Browser Extension & AI Verification Engine"
-          problem="Social media is saturated with unchecked, highly viral misinformation that users struggle to critically evaluate in real-time."
-          solution="An AI-powered Chrome extension that actively monitors DOM mutations on Instagram, using regex heuristics and the Gemini API to detect, verify, and flag suspicious claims on the fly."
-          // FIX: Added executiveSummary and isTechnicalMode
+          problem="Social media is saturated with unchecked, highly viral misinformation. Building an extension to combat this on infinite-scroll SPAs usually results in massive memory leaks and scrolling stutter (layout thrashing)."
+          
+          // APPLIED TRUE METRICS
+          metric={isTechnicalMode ? "~60MB" : "Real-time"}
+          metricLabel={isTechnicalMode ? "Peak Heap Delta (Infinite Scroll)" : "In-Feed Fact Verification"}
+          solution="An AI-powered Chrome extension that actively monitors DOM mutations on Instagram. By implementing aggressive garbage collection and local caching, it verifies claims using the Gemini API while strictly capping memory overhead."
+          
           executiveSummary="A browser tool that automatically fact-checks Instagram in real-time. It reads the claims made in posts, compares them against a verified AI database, and places a clear warning badge on the screen to protect users from misinformation."
           isTechnicalMode={isTechnicalMode}
-          stack={["JavaScript", "Chrome API", "Gemini API", "DOM Observers", "HTML/CSS"]}
+          stack={["JavaScript", "Chrome API", "Gemini API", "DOM Observers", "IndexedDB"]}
           githubUrl="https://github.com/mayurpatel78645/tathya-satyapan"
           highlights={[
             "Engineered a highly performant DOM monitoring system using MutationObserver and IntersectionObserver.",
-            "Implemented a local caching system and request queues to aggressively rate-limit expensive API calls.",
-            "Built a real-time confidence scoring engine that injects visual warning badges seamlessly into the native Instagram UI."
+            "Profiled V8 engine heap snapshots to ensure aggressive garbage collection, capping memory overhead at ~60MB during heavy infinite scrolling.",
+            "Injected visual warning badges using DocumentFragments to prevent main-thread layout thrashing."
           ]}
           tradeoffs={[
             {
-              choice: "MutationObserver vs API Interception",
-              reason: "Intercepting internal React state or private network requests is brittle and violates CORS/security policies. Using DOM observers ensures the extension remains robust even when Instagram changes their internal API structure."
+              choice: "Local IndexedDB Caching vs Stateless Observer",
+              reason: "Because Instagram constantly unmounts and remounts DOM nodes during infinite scroll, a stateless observer would trigger infinite duplicate LLM calls. Storing verified claim hashes locally reduced API costs drastically."
             },
             {
-              choice: "Regex Pre-filtering vs 100% LLM",
-              reason: "Sending every single DOM mutation to the Gemini API would exhaust rate limits instantly. I built a lightweight Regex heuristic layer to pre-filter noise, ensuring only highly structured 'claims' trigger an expensive AI verification."
+              choice: "MutationObserver vs API Interception",
+              reason: "Intercepting internal React state or private network requests is brittle and violates CORS/security policies. Using DOM observers ensures the extension remains robust even when Instagram changes their internal API structure."
             }
           ]}
           media={[
@@ -152,7 +162,6 @@ export default function Projects() {
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          // FIX: Added adaptive background (bg-surface/80), adaptive borders (border-border-subtle), and a soft drop shadow for light mode.
           className="mt-32 p-8 md:p-12 rounded-2xl bg-surface/80 dark:bg-gradient-to-b dark:from-surface/20 dark:to-transparent border border-border-subtle shadow-sm dark:shadow-none relative overflow-hidden group"
         >
           <div className="absolute top-0 right-0 p-8 flex items-center gap-2">
@@ -172,7 +181,6 @@ export default function Projects() {
 
           <div className="flex flex-wrap gap-2.5">
             {["FastAPI", "Vector Embeddings", "PostgreSQL", "Playwright", "LLM Orchestration"].map(tech => (
-              // FIX: Replaced bg-background/50 and border-white/5 with adaptive colors
               <span key={tech} className="px-3 py-1.5 bg-surface dark:bg-background/50 border border-border-subtle rounded flex items-center text-[10px] uppercase tracking-wider text-secondary/70 font-mono cursor-default group-hover:border-border-strong transition-colors">
                 {tech}
               </span>
@@ -185,8 +193,8 @@ export default function Projects() {
   );
 }
 
-// FIX: Added executiveSummary and isTechnicalMode to the component props
-function ProjectCaseStudy({ title, category, problem, solution, executiveSummary, stack, demoUrl, githubUrl, highlights, tradeoffs, type, media, isTechnicalMode }: any) {
+// FIX: Component updated with the new Metric Ribbon and Light Mode fixes
+function ProjectCaseStudy({ title, category, problem, metric, metricLabel, solution, executiveSummary, stack, demoUrl, githubUrl, highlights, tradeoffs, type, media, isTechnicalMode }: any) {
   const [isHovered, setIsHovered] = useState(false);
 
   return (
@@ -197,7 +205,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
       viewport={{ once: true, margin: "-100px" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-b border-primary/10 pb-32 last:border-0 group relative scroll-mt-32"
+      className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 border-b border-border-subtle pb-32 last:border-0 group relative scroll-mt-32"
     >
       {/* LEFT COLUMN: Sticky Narrative & CTAs */}
       <div className="lg:col-span-4 relative">
@@ -212,8 +220,20 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
                 <strong className="text-primary block mb-2 text-sm uppercase tracking-wider font-mono">The Problem</strong>
                 <p className="leading-relaxed text-sm md:text-base">{problem}</p>
               </div>
+
+              {/* THE NEW IMPACT RIBBON */}
+              <div className="flex items-center gap-4 py-3 my-2 border-l-2 border-accent pl-4 bg-gradient-to-r from-accent/5 dark:from-accent/10 to-transparent rounded-r-lg">
+                <Target className="w-5 h-5 text-accent shrink-0 hidden md:block" />
+                <div className="flex flex-col">
+                  <span className="text-xl md:text-2xl font-semibold text-primary tracking-tight">
+                    {metric}
+                  </span>
+                  <span className="text-[10px] uppercase font-mono text-secondary/80 tracking-widest">
+                    {metricLabel}
+                  </span>
+                </div>
+              </div>
               
-              {/* FIX: The Dynamic Text Swap using AnimatePresence */}
               <AnimatePresence mode="wait">
                 <motion.div 
                   key={isTechnicalMode ? 'tech' : 'exec'}
@@ -236,7 +256,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
           {/* Action Buttons */}
           <div className="flex flex-wrap gap-4 pt-2">
             {githubUrl && (
-              <a href={githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-surface hover:bg-surfaceHover border border-primary/10 px-5 py-2.5 rounded-lg transition-colors">
+              <a href={githubUrl} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-sm bg-surface hover:bg-surfaceHover border border-border-strong px-5 py-2.5 rounded-lg transition-colors">
                 <GitBranch className="w-4 h-4" /> Repository
               </a>
             )}
@@ -258,8 +278,8 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
           {media && media.length > 0 ? (
             <ProjectMediaViewer images={media} />
           ) : (
-            <div className="relative w-full aspect-video rounded-xl bg-surface/30 border border-white/5 overflow-hidden transition-all duration-500 flex flex-col items-center justify-center shadow-inner">
-              <div className="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent opacity-50" />
+            <div className="relative w-full aspect-video rounded-xl bg-surface/50 dark:bg-surface/30 border border-border-subtle overflow-hidden transition-all duration-500 flex flex-col items-center justify-center shadow-sm dark:shadow-inner">
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-50" />
               <MonitorPlay className="w-8 h-8 text-secondary/40 mb-3" />
               <p className="text-xs font-mono text-secondary/50 uppercase tracking-widest">
                 Product UI Preview
@@ -269,7 +289,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
         </div>
 
         {/* 2. ARCHITECTURE DIAGRAM */}
-        <div className="bg-surface/50 border border-white/5 rounded-xl p-6 relative overflow-hidden transition-colors duration-500 group-hover:border-primary/10 group-hover:bg-surface">
+        <div className="bg-surface/50 dark:bg-surface/20 border border-border-subtle rounded-xl p-6 relative overflow-hidden transition-colors duration-500 group-hover:border-border-strong group-hover:bg-surface shadow-sm dark:shadow-none">
            <div className="absolute top-0 right-0 p-4 z-20">
               <span className="text-[10px] uppercase font-mono tracking-widest text-secondary/50">System Architecture</span>
            </div>
@@ -277,7 +297,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
         </div>
 
         {/* 3. TECHNICAL IMPLEMENTATION */}
-        <div className="bg-surface/30 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/50 group-hover:border-primary/10">
+        <div className="bg-surface/30 border border-border-subtle rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/50 group-hover:border-border-strong shadow-sm dark:shadow-none">
           <h3 className="text-sm font-mono uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-accent/80" />
             Technical Implementation
@@ -292,9 +312,9 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
             ))}
           </ul>
 
-          <div className="mt-10 pt-6 border-t border-white/5 flex flex-wrap gap-2.5">
+          <div className="mt-10 pt-6 border-t border-border-subtle flex flex-wrap gap-2.5">
             {stack.map((tech: string) => (
-              <span key={tech} className="px-3 py-1.5 bg-background border border-primary/10 rounded flex items-center text-[11px] uppercase tracking-wider text-secondary font-mono cursor-default">
+              <span key={tech} className="px-3 py-1.5 bg-background border border-border-subtle rounded flex items-center text-[11px] uppercase tracking-wider text-secondary font-mono cursor-default">
                 {tech}
               </span>
             ))}
@@ -303,7 +323,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
 
         {/* 4. ARCHITECTURAL TRADEOFFS */}
         {tradeoffs && tradeoffs.length > 0 && (
-          <div className="bg-surface/20 border border-white/5 rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/30 group-hover:border-primary/10 mt-[-2rem]">
+          <div className="bg-surface/20 border border-border-subtle rounded-xl p-8 transition-colors duration-500 group-hover:bg-surface/30 group-hover:border-border-strong mt-[-2rem] shadow-sm dark:shadow-none">
             <h3 className="text-sm font-mono uppercase tracking-widest text-primary mb-6 flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-secondary/50" />
               Architectural Tradeoffs
@@ -311,7 +331,7 @@ function ProjectCaseStudy({ title, category, problem, solution, executiveSummary
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {tradeoffs.map((t: any, i: number) => (
                 <div key={i} className="flex flex-col gap-3">
-                  <span className="text-sm font-medium text-primary border-b border-white/5 pb-2 inline-block w-fit">
+                  <span className="text-sm font-medium text-primary border-b border-border-subtle pb-2 inline-block w-fit">
                     {t.choice}
                   </span>
                   <span className="text-sm text-secondary leading-relaxed">
