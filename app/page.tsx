@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Play, QrCode, Layers } from "lucide-react";
+import { ArrowRight, CloudRain, Play, QrCode, Layers } from "lucide-react";
 import { motion, Variants } from "framer-motion";
 
 // --- GLOBAL MOTION RHYTHM ---
@@ -166,23 +166,24 @@ export default function Home() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {/* FIX: Adjusted card background, adaptive borders, and shadow logic */}
-          <Link href="/projects#director" className="group block p-8 rounded-2xl bg-surface/80 dark:bg-gradient-to-br dark:from-surface/40 dark:to-surface/10 border border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-md dark:shadow-inner backdrop-blur-sm relative overflow-hidden">
+          <Link href="/projects#weather-alert" className="group block p-8 rounded-2xl bg-surface/80 dark:bg-gradient-to-br dark:from-surface/40 dark:to-surface/10 border border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-md dark:shadow-inner backdrop-blur-sm relative overflow-hidden">
             <div className="absolute inset-0 bg-accent/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="flex justify-between items-start mb-8 relative z-10">
-              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-background transition-all duration-500">
-                <Play className="w-5 h-5 ml-0.5" />
+              <div className="flex justify-between items-start mb-8 relative z-10">
+                <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center border border-accent/20 text-accent group-hover:scale-110 group-hover:bg-accent group-hover:text-background transition-all duration-500">
+                  <CloudRain className="w-5 h-5" />
+                </div>
+                <div className="flex flex-col items-end gap-1 font-mono text-[10px] uppercase tracking-wider text-secondary/50 group-hover:text-accent/70 transition-colors">
+                  <span>Status: Keep-Alive</span>
+                  <span>Port: 443 Bypass</span>
+                </div>
               </div>
-              <div className="flex flex-col items-end gap-1 font-mono text-[10px] uppercase tracking-wider text-secondary/50 group-hover:text-accent/70 transition-colors">
-                <span>Status: Idle</span>
-                <span>Latency: 14ms</span>
+              <h3 className="text-xl font-medium text-primary mb-2 relative z-10">Daily Weather Alert</h3>
+              <p className="text-sm text-secondary leading-relaxed mb-6 relative z-10">Automated microservice pushing personalized daily forecasts, engineered to bypass cloud datacenter SMTP firewalls.</p>
+              <div className="flex gap-2 relative z-10 opacity-60 group-hover:opacity-100 transition-opacity">
+                  <span className="text-[9px] font-mono border border-primary/20 px-2 py-0.5 rounded uppercase">Flask</span>
+                  <span className="text-[9px] font-mono border border-primary/20 px-2 py-0.5 rounded uppercase">React</span>
+                  <span className="text-[9px] font-mono border border-primary/20 px-2 py-0.5 rounded uppercase">TiDB Serverless</span>
               </div>
-            </div>
-            <h3 className="text-xl font-medium text-primary mb-2 relative z-10">The Director</h3>
-            <p className="text-sm text-secondary leading-relaxed mb-6 relative z-10">Asynchronous video processing pipeline using FastAPI, FFmpeg, and contextual AI ranking.</p>
-            <div className="flex gap-2 relative z-10 opacity-60 group-hover:opacity-100 transition-opacity">
-               <span className="text-[9px] font-mono border border-primary/20 px-2 py-0.5 rounded uppercase">FastAPI</span>
-               <span className="text-[9px] font-mono border border-primary/20 px-2 py-0.5 rounded uppercase">FFmpeg</span>
-            </div>
           </Link>
 
           <Link href="/projects#smartqr" className="group block p-8 rounded-2xl bg-surface/80 dark:bg-gradient-to-br dark:from-surface/40 dark:to-surface/10 border border-primary/10 hover:border-primary/30 transition-all duration-500 shadow-sm hover:shadow-md dark:shadow-inner backdrop-blur-sm relative overflow-hidden">
