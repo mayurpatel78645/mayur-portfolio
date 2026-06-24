@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Database, Server, Globe, Cpu, FileVideo, Layers, Zap, ScanEye, ListFilter, ShieldAlert, Activity } from "lucide-react";
+import { Database, Timer, CloudRain, Send, Server, Globe, Cpu, FileVideo, Layers, Zap, ScanEye, ListFilter, ShieldAlert, Activity } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 // UPGRADED DATA: Added deep engineering metadata and simulated latency
@@ -55,6 +55,24 @@ const ARCHITECTURE_DATA = {
     { 
       icon: ShieldAlert, label: "Badge Injector", detail: "Dynamic CSS insertion & shadow DOM isolation.",
       latency: "14", metrics: [{ label: "Isolation", value: "Shadow DOM" }, { label: "Style", value: "Injected CSS" }]
+    }
+  ],
+  weather: [
+    { 
+      icon: Timer, label: "Cron Trigger", detail: "10-minute keep-alive polling & 7:00 AM daily execution.",
+      latency: "45", metrics: [{ label: "Keep-Alive", value: "Active (10m)" }, { label: "Cold Start", value: "Bypassed" }]
+    },
+    { 
+      icon: Database, label: "TiDB Serverless", detail: "Cloud MySQL connection fetching user health parameters.",
+      latency: "120", metrics: [{ label: "Engine", value: "MySQL Serverless" }, { label: "Connection", value: "Cursor (Dict)" }]
+    },
+    { 
+      icon: CloudRain, label: "OpenWeather API", detail: "Retrieving real-time localized meteorological telemetry.",
+      latency: "350", metrics: [{ label: "Protocol", value: "REST API" }, { label: "Data Format", value: "JSON Payload" }]
+    },
+    { 
+      icon: Send, label: "Brevo Dispatch", detail: "Transmitting over HTTPS to bypass Render's SMTP firewall.",
+      latency: "420", metrics: [{ label: "Port", value: "443 (HTTPS)" }, { label: "Delivery Rate", value: "100%" }]
     }
   ]
 };

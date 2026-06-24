@@ -41,6 +41,47 @@ export default function Projects() {
         </div>
       </div>
 
+      {/* DAILY WEATHER ALERT */}
+        <ProjectCaseStudy 
+        type="weather"
+        title="Daily Weather Alert System"
+        category="Full-Stack Cloud Automation & API Integration"
+        
+        problem="Forgetting to manually check the weather app in the morning leaves you unprepared for the day. I needed a reliable, automated system that pushes a personalized forecast directly to my inbox before I wake up, removing the need for manual polling entirely."
+        
+        // APPLIED TRUE METRICS
+        metric={isTechnicalMode ? "100%" : "Daily"}
+        metricLabel={isTechnicalMode ? "Delivery Rate (Port 443 Bypass)" : "Automated Delivery"}
+        solution="A microservice-inspired architecture using Flask and React. It bypasses datacenter SMTP blockades via the Brevo REST API and utilizes a keep-alive cron mechanism to prevent cold-start timeouts for instant automated dispatch."
+        
+        executiveSummary="A fully automated application that checks the daily forecast for users and sends them a highly personalized weather and health alert every morning at 7:00 AM, entirely on its own."
+        isTechnicalMode={isTechnicalMode}
+        stack={["React", "Python Flask", "TiDB Serverless", "Brevo API", "OpenWeather", "Cron-job"]}
+        demoUrl="https://weather-frontend-xjak.onrender.com/"
+        githubUrl="https://github.com/mayurpatel78645/weather-alert-app"
+        highlights={[
+          "Engineered a custom socket diagnostic tool to uncover Render's network-level SMTP (Port 587) firewall blockade.",
+          "Pivoted architecture to utilize the Brevo REST API, shifting email payloads to HTTPS (Port 443) to guarantee 100% delivery.",
+          "Implemented a 10-minute automated keep-alive polling mechanism to bypass 504 Gateway Timeouts caused by serverless cold starts.",
+          "Refactored the React frontend with asynchronous UI states to prevent database pollution from repeated API calls during server wake cycles."
+        ]}
+        tradeoffs={[
+          {
+            choice: "External Cron Jobs vs Native Server Cron",
+            reason: "Native OS-level cron jobs require paid, always-on instances. Utilizing cron-job.org for external HTTP pings achieved the exact same automated scheduling while maintaining a strictly $0 infrastructure cost."
+          },
+          {
+            choice: "REST API Email vs Native Python smtplib",
+            reason: "Native smtplib is cleaner locally, but cloud datacenters aggressively block standard SMTP ports to prevent spam. Sending JSON payloads over standard web ports (HTTPS/443) via REST bypassed these firewall constraints entirely."
+          }
+        ]}
+        media={[
+          { src: "weather-1.png", label: "Registration UI & Loading State" },
+          { src: "weather-2.png", label: "TiDB Serverless Database" },
+          { src: "weather-3.png", label: "Automated Email Delivery" },
+        ]}
+      />
+
       <div className="space-y-24">
         {/* THE DIRECTOR */}
         <ProjectCaseStudy 
